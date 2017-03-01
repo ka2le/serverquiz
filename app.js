@@ -31,14 +31,15 @@ sockets.on( 'connection', function( client ) {
   client.on( 'message', function( message ) {
 	console.log(message);
 	console.log("sockets: ");
-	
+	client.send("tackar")
 	console.log(sockets.clients);
 	console.log("----------------------------------");
-	var theClients = io.sockets.clients();
-	var theClients2 = io.sockets.connected;
-	console.log(theClients);
-	console.log("theClients2:");
-	console.log(theClients2);
+	
+	//var theClients = io.sockets.clients();
+	//var theClients2 = io.sockets.connected;
+	//console.log(theClients);
+	//console.log("theClients2:");
+	//console.log(theClients2);
     for( var c = 0; c < sockets.clients.length; c++ ) {
 		console.log(sockets.clients[c]);
       sockets.clients[c].send( message );   
