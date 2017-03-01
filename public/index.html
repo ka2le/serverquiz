@@ -8,19 +8,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="stylesheets/style.css">
   </head>
+<script>
+var input = null;  
+var socket = null;
 
+// Input
+input = document.querySelector( 'input[type=\'text\']' );  
+input.addEventListener( 'keypress', doInputKey );    
+
+// WebSocket
+socket = new WebSocket( 'ws://' + window.location.host );  
+socket.addEventListener( 'message', doSocketMessage );
+
+// Keyboard
+function doInputKey( event ) {  
+  var message = null;
+
+  if( event.keyCode == 13 && this.value.trim().length > 0 ) {
+    message = {
+      content: this.value.trim(),
+    };
+
+    // Send message
+    socket.send( JSON.stringify( message ) );  
+  }     
+}
+
+// Message
+function doSocketMessage( message ) {  
+  var data = null;
+  var element = null;
+
+  // Parse
+  data = JSON.parse( message.data );
+
+  // Build and append
+  element = document.createElement( 'p' );
+  element.innerHTML = data.content;
+  document.body.appendChild( element );
+}
+</script>
   <body>
-    <table>
-      <tr>
-        <td style= "width:30%;">
-          <img class = "newappIcon" src="images/newapp-icon.png">
-        </td>
-        <td>
-          <h1 id="message">Hello World!</h1>
-          <p class='description'></p> Thanks for creating a <span class = "blue">NodeJS Starter Application</span>.
-        </td>
-      </tr>
-    </table>
+		<input type="text">
   </body>
 
 </html>
