@@ -17,7 +17,7 @@ function onload(){
 	input.addEventListener( 'keypress', doInputKey );    
 
 	// WebSocket
-	socket = new WebSocket( 'ws://' + window.location.host );  
+	socket = new WebSocket( 'wss://' + window.location.host );  
 	socket.addEventListener( 'message', doSocketMessage );
 
 }
