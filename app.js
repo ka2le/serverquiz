@@ -30,6 +30,8 @@ sockets.on( 'connection', function( client ) {
   // Echo messages to all clients
   client.on( 'message', function( message ) {
 	console.log(message);
+	console.log("sockets: ");
+	console.log(sockets);
     for( var c = 0; c < sockets.clients.length; c++ ) {
 		console.log(sockets.clients[c]);
       sockets.clients[c].send( message );   
@@ -40,6 +42,7 @@ sockets.on( 'connection', function( client ) {
 // Start
 server.on( 'request', app );  
 server.listen( environment.port, function() {  
+  console.log("environment.url");
   console.log( environment.url );
 } );
 
