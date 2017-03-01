@@ -1,9 +1,39 @@
 /*eslint-env node*/
 
+
+
+ var WebSocketServer = require('ws').Server;
+ 
+ var port = (process.env.VCAP_APP_PORT || 8888); 
+ 
+ wss = new WebSocketServer({port: port});
+ wss.on('connection', function(ws) {
+     ws.on('message', function(message) {
+         console.log('received: %s', message);
+         ws.send('echo: ' + message);
+     });
+     ws.send('connected');
+ });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //------------------------------------------------------------------------------
 // node.js starter application for Bluemix
 //------------------------------------------------------------------------------
-
+/*
 // This application uses express as its web server
 // for more info, see: http://expressjs.com
 var express = require('express');
@@ -26,3 +56,4 @@ app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
   console.log("server starting on " + appEnv.url);
 });
+*/
