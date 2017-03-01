@@ -11,20 +11,23 @@
 <script>
 var input = null;  
 var socket = null;
+function onload(){
+	// Input
+	input = document.querySelector( 'input[type=\'text\']' );  
+	input.addEventListener( 'keypress', doInputKey );    
 
-// Input
-input = document.querySelector( 'input[type=\'text\']' );  
-input.addEventListener( 'keypress', doInputKey );    
+	// WebSocket
+	socket = new WebSocket( 'ws://' + window.location.host );  
+	socket.addEventListener( 'message', doSocketMessage );
 
-// WebSocket
-socket = new WebSocket( 'ws://' + window.location.host );  
-socket.addEventListener( 'message', doSocketMessage );
+}
 
 // Keyboard
 function doInputKey( event ) {  
   var message = null;
-
+console.log("doInputKey");
   if( event.keyCode == 13 && this.value.trim().length > 0 ) {
+		console.log("Enter");
     message = {
       content: this.value.trim(),
     };
@@ -38,7 +41,7 @@ function doInputKey( event ) {
 function doSocketMessage( message ) {  
   var data = null;
   var element = null;
-
+	console.log("doSocketMessage");
   // Parse
   data = JSON.parse( message.data );
 
@@ -48,7 +51,7 @@ function doSocketMessage( message ) {
   document.body.appendChild( element );
 }
 </script>
-  <body>
+  <body onload="onload()">
 		<input type="text">
   </body>
 
