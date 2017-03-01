@@ -44,7 +44,7 @@ function doSocketMessage( message ) {
 	console.log("doSocketMessage");
   // Parse
   data = JSON.parse( message.data );
-
+	console.log(message);
   // Build and append
   element = document.createElement( 'p' );
   element.innerHTML = data.content;

@@ -31,6 +31,7 @@ sockets.on( 'connection', function( client ) {
   client.on( 'message', function( message ) {
 	console.log(message);
     for( var c = 0; c < sockets.clients.length; c++ ) {
+		console.log(sockets.clients[c]);
       sockets.clients[c].send( message );   
     }
   } );
