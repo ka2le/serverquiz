@@ -5,7 +5,7 @@ var cfenv = require( 'cfenv' );
 var express = require( 'express' );  
 var http = require( 'http' );  
 var ws = require( 'ws' );
-
+var clients = [];
 // Environment
 var environment = cfenv.getAppEnv();
 
@@ -26,13 +26,17 @@ console.log("Started");
 sockets.on( 'connection', function( client ) {  
   // Debug
   console.log( 'Connection.' );
-
+  clients.push(client);
+  console.log("------------------clients------------------------");
+  console.log(clients);
+  console.log("------------------clients[0]------------------------");
+  console.log(clients[0]);
   // Echo messages to all clients
   client.on( 'message', function( message ) {
 	console.log(message);
 	console.log("sockets: ");
-	client.send("tackar")
-	console.log(sockets.clients);
+	client.send(message)
+	//console.log(sockets.clients);
 	console.log("----------------------------------");
 	
 	//var theClients = io.sockets.clients();
