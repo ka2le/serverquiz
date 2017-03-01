@@ -35,7 +35,7 @@ sockets.on( 'connection', function( client ) {
 	console.log(sockets.clients);
 	console.log("----------------------------------");
 	var theClients = io.sockets.clients();
-	var theClients2 = io.sockets.connected();
+	var theClients2 = io.sockets.connected;
 	console.log(theClients);
 	console.log("theClients2:");
 	console.log(theClients2);
