@@ -28,7 +28,7 @@ sockets.on( 'connection', function( client ) {
   console.log( 'Connection.' );
   clients.push(client);
   console.log("------------------clients------------------------");
-  console.log(clients);
+  //console.log(clients);
   console.log("------------------clients[0]------------------------");
   console.log(clients[0]);
   // Echo messages to all clients
@@ -38,15 +38,14 @@ sockets.on( 'connection', function( client ) {
 	client.send(message)
 	//console.log(sockets.clients);
 	console.log("----------------------------------");
-	
+	//clients[0].send(message);
 	//var theClients = io.sockets.clients();
 	//var theClients2 = io.sockets.connected;
 	//console.log(theClients);
 	//console.log("theClients2:");
 	//console.log(theClients2);
-    for( var c = 0; c < sockets.clients.length; c++ ) {
-		console.log(sockets.clients[c]);
-      sockets.clients[c].send( message );   
+    for( var i = 0; i < clients.length; i++ ) {	
+       clients[i].send( message );   
     }
   } );
 } );
