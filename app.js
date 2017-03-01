@@ -20,6 +20,7 @@ var server = http.createServer();
 var sockets = new ws.Server( {  
   server: server
 } );
+console.log("Started");
 
 // Listeners
 sockets.on( 'connection', function( client ) {  
@@ -28,6 +29,7 @@ sockets.on( 'connection', function( client ) {
 
   // Echo messages to all clients
   client.on( 'message', function( message ) {
+	console.log(message);
     for( var c = 0; c < sockets.clients.length; c++ ) {
       sockets.clients[c].send( message );   
     }
