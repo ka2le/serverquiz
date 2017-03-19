@@ -37,8 +37,8 @@ sockets.on( 'connection', function( client ) {
   client.on( 'message', function( message ) {
 	console.log(message);
 	//console.log("sockets: ");
-	var data = JSON.parse( message );
-	console.log(data)
+	//var data = JSON.parse( message );
+	//console.log(data)
 	//var content = data.content;
 	//client.send(message);
 	//console.log(sockets.clients);
