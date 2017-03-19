@@ -51,7 +51,7 @@ sockets.on( 'connection', function( client ) {
 		console.log(theHost);
 	}
 	
-	if(content=="iPlayer"){
+	if(message=="iPlayer"){
 		
 		players.push(client);
 		client.send('{"content":"You are player: '+ players.length+'"}');
