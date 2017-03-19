@@ -37,20 +37,23 @@ sockets.on( 'connection', function( client ) {
   client.on( 'message', function( message ) {
 	console.log(message);
 	console.log("sockets: ");
-	var data = JSON.parse( message.data );
-	var content = data.content;
+	//var data = JSON.parse( message.data );
+	//var content = data.content;
 	//client.send(message);
 	//console.log(sockets.clients);
 	console.log("----------------------------------");
 
-	if(content=="iHost"){
+	if(message=='{"content":"iHost"}'){
+		console.log("iHost")
 		theHost = client;
 		theHost.send('{"content":"You are host"}');
+		
 	}
+	/*
 	if(content=="iPlayer"){
 		players.push(client);
 		client.send('{"content":"You are player: '+ players.length+'"}');
-	}
+	}*/
     for( var i = 0; i < clients.length; i++ ) {	
        clients[i].send( message );   
     }
