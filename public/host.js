@@ -44,8 +44,8 @@ function newRound(){
 
 }
 function updateScore(){
-	document.getElementById("scorePlayer1").innerHTML = scoreBoard[0];
-	document.getElementById("scorePlayer2").innerHTML = scoreBoard[1];
+	document.getElementById("scorePlayer1").innerHTML = "Score Player1: "+scoreBoard[0];
+	document.getElementById("scorePlayer2").innerHTML = "Score Player2: "+scoreBoard[1];
 	
 }
 
