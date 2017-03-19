@@ -51,34 +51,21 @@ function doSocketMessage( message ) {
   document.body.appendChild( element );
 }
 
-function iHost(){
+
+function send(text){
 	var message = {
-      content: "iHost",
-    };
-	socket.send( JSON.stringify( message ) ); 
-	//socket.send( "iHost" ); 
-}
-function iPlayer(){
-	var message = {
-      content: "iPlayer",
-    };
-	socket.send( JSON.stringify( message ) );	 
-}
-function sendAnswer(answer){
-	var message = {
-      content: "Answer_A",
+      content: text,
     };
 	socket.send( JSON.stringify( message ) );	 
 
 }
-
 
 </script>
   <body onload="onload()">
 		<input type="text">
-		<input type="button" value="Become HOST" onclick="iHost()">
-		<input type="button" value="become player" onclick="iPlayer()">
-		<input type="button" value="send Answer A" onclick="sendAnswer('A')">
+		<input type="button" value="Become HOST" onclick="send('iHost')">
+		<input type="button" value="become player" onclick="send('iPlayer')">
+		<input type="button" value="send Answer A" onclick="send('Answer_A')">
   </body>
 
 </html>
