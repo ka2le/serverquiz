@@ -39,6 +39,7 @@ function onload(){
 		if(type=="host"){
 			$("#host").show();
 			iAm = "host";
+			nextQ();
 		}else{
 			
 			var value = type.split("=")[1];
@@ -79,7 +80,11 @@ function doSocketMessage( message ) {
   var data = JSON.parse( message.data );
   var text = data.content;
   console.log(text);
+  var contentArray = text.split("#");
   var intent = text.split("#")[0];
+ // if(iAm == "player1" || iAm == "player2"){  }
+ 
+ //before login
   if(intent == "hidePlayer"){
 	var value = text.split("#")[1];
 	if(value == 1){
@@ -90,12 +95,49 @@ function doSocketMessage( message ) {
 	}
   }
   
-  //console.log(message);
-  // Build and append
-  //element = document.createElement( 'p' );
-  //element.innerHTML = data.content;
-  //document.body.appendChild( element );
+  //player code
+  
+  
+  //host code
+  if(intent == "nextQ"){
+	nextQ();
+  } 
+  if(intent == "playerAnswer"){
+	var thePlayer = contentArray[1];
+	var theAnswer = contentArray[2];
+	var correctAnswer = theQuestions[currentQuestion][5];
+	if(theAnswer==correctAnswer){
+		if(thePlayer == "player1"){
+			currentRound[0] = 1;
+		}
+		if(thePlayer == "player2"){
+			currentRound[1] = 1;
+		}
+	}
+	hasAnswered++;
+	if(hasAnswered ==2){
+		//sendTo(theHost, "nextQ");
+		currentQuestion++;
+		nextQ();
+		send("currentQuestion#"+currentQuestion);
+		hasAnswered = 0;
+		scoreBoard[0] += currentRound[0]; 
+		scoreBoard[1] += currentRound[1];
+		document.getElementById("scorePlayer1").innerHTML = scoreBoard[0];
+		document.getElementById("scorePlayer2").innerHTML = scoreBoard[1];
+		currentRound = [0,0];
+	}
+  }
+  
 }
+function nextQ(){
+	document.getElementById("theQuestion").innerHTML = theQuestions[currentQuestion][0];
+}
+var scoreBoard = [0, 0];
+var currentRound = [0,0];
+var  currentQuestion = 0;
+var theQuestions = [["the question","answerA","answerB","answerC","answerD","C"], ["the question2","answerA2","answerB2","answerC2","answerD2","B"]];
+var hasAnswered = 0;
 
 
 function send(text){
@@ -141,8 +183,10 @@ function updateUrl(addText){
 		
 		</div>
 		<div id="host" class="container">
-			<h1>host</h1>
-			<label id="theQuestion" value="Questions goes here">
+			<h1>host</h1><br>
+			score player1: <label id="scorePlayer1" >0</label><br>
+			score player2: <label id="scorePlayer2" >0</label><br><br>
+			<label id="theQuestion" >Question goes here</label>
 		</div>
 		<div id="pick" class="container">
 			

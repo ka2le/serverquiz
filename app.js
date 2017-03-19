@@ -26,6 +26,7 @@ var theHost;
 var players = [];
 var player1 = "";
 var player2 = "";
+
 // Listeners
 sockets.on( 'connection', function( client ) {  
   // Debug
@@ -47,7 +48,8 @@ sockets.on( 'connection', function( client ) {
 	console.log("----------------------------------");
 	var theContent = message.split(":")[1];
 	theContent = theContent.split('"')[1];
-	var intent = theContent.split("#")[0];
+	var contentArray = theContent.split("#");
+	var intent = contentArray[0];
 	if(intent=="iHost"){
 		console.log("iHost")
 		theHost = client;
@@ -80,6 +82,12 @@ sockets.on( 'connection', function( client ) {
 		}
 		//client.send("#playerLeft#1")
 		sendTo(client, "hidePlayer#"+hidePlayer);
+	}
+	if(intent=="answer"){
+		var who = contentArray[contentArray.length-1];
+		var theAnswer = contentArray[1];
+		sendTo(theHost, ("playerAnswer#"+who+"#"+theAnswer));
+		
 	}
     for( var i = 0; i < clients.length; i++ ) {	
        clients[i].send( message );   
