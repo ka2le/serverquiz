@@ -26,20 +26,28 @@ function handleInput(data){
 		}
 		hasAnswered ++;
 		if(hasAnswered>1){
-			
-			showNextQ();
-			scoreBoard[0] +=  currentRound[0];
-			scoreBoard[1] +=  currentRound[1];
-			currentQuestion++;
-			currentRound = [0,0]
-			hasAnswered = 0;
-			send("newQ");
+			newRound();
 		}
 	}
 	console.log(data);
 	
 }
+function newRound(){
+	showNextQ();
+	scoreBoard[0] +=  currentRound[0];
+	scoreBoard[1] +=  currentRound[1];
+	updateScore();
+	currentQuestion++;
+	currentRound = [0,0]
+	hasAnswered = 0;
+	send("newQ");	
 
+}
+function updateScore(){
+	doctype.getElementById("scorePlayer1").innerHTML = scoreBoard[0];
+	doctype.getElementById("scorePlayer2").innerHTML = scoreBoard[1];
+	
+}
 
 
 function showNextQ(){
