@@ -52,15 +52,22 @@ function doSocketMessage( message ) {
 }
 
 function iHost(){
-	var message = "iHost";
+	var message = {
+      content: "iHost",
+    };
 	socket.send( JSON.stringify( message ) ); 
+	//socket.send( "iHost" ); 
 }
 function iPlayer(){
-	var message = "iPlayer";
+	var message = {
+      content: "iPlayer",
+    };
 	socket.send( JSON.stringify( message ) );	 
 }
 function sendAnswer(answer){
-	var message = ("Answer:"+answer);
+	var message = {
+      content: "Answer_A",
+    };
 	socket.send( JSON.stringify( message ) );	 
 
 }

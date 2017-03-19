@@ -37,22 +37,19 @@ sockets.on( 'connection', function( client ) {
   client.on( 'message', function( message ) {
 	console.log(message);
 	console.log("sockets: ");
+	var data = JSON.parse( message.data );
+	var content = data.content;
 	//client.send(message);
 	//console.log(sockets.clients);
 	console.log("----------------------------------");
-	//clients[0].send(message);
-	//var theClients = io.sockets.clients();
-	//var theClients2 = io.sockets.connected;
-	//console.log(theClients);
-	//console.log("theClients2:");
-	//console.log(theClients2);
-	if(message=="iHost"){
+
+	if(content=="iHost"){
 		theHost = client;
-		theHost.send("you are host");
+		theHost.send('{"content":"You are host"}');
 	}
-	if(message=="iPlayer"){
+	if(content=="iPlayer"){
 		players.push(client);
-		client.send("You are player:" + players.length);
+		client.send('{"content":"You are player: '+ players.length+'"}');
 	}
     for( var i = 0; i < clients.length; i++ ) {	
        clients[i].send( message );   
