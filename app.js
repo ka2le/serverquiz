@@ -22,6 +22,8 @@ var sockets = new ws.Server( {
 } );
 console.log("Started");
 
+var theHost;
+var players = [];
 // Listeners
 sockets.on( 'connection', function( client ) {  
   // Debug
@@ -35,7 +37,7 @@ sockets.on( 'connection', function( client ) {
   client.on( 'message', function( message ) {
 	console.log(message);
 	console.log("sockets: ");
-	client.send(message)
+	//client.send(message);
 	//console.log(sockets.clients);
 	console.log("----------------------------------");
 	//clients[0].send(message);
@@ -44,6 +46,14 @@ sockets.on( 'connection', function( client ) {
 	//console.log(theClients);
 	//console.log("theClients2:");
 	//console.log(theClients2);
+	if(message=="iHost"){
+		theHost = client;
+		theHost.send("you are host");
+	}
+	if(message=="iPlayer"){
+		players.push(client);
+		client.send("You are player:" + players.length);
+	}
     for( var i = 0; i < clients.length; i++ ) {	
        clients[i].send( message );   
     }
