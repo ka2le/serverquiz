@@ -48,10 +48,11 @@ sockets.on( 'connection', function( client ) {
 		console.log("iHost")
 		theHost = client;
 		theHost.send('{"content":"You are host"}');
-		
+		console.log(theHost);
 	}
 	
 	if(content=="iPlayer"){
+		
 		players.push(client);
 		client.send('{"content":"You are player: '+ players.length+'"}');
 	}
