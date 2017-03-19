@@ -18,7 +18,10 @@ a {
 a:hover {
 	text-decoration: underline;
 }
-
+.bigbutton{
+	height: 50 px;
+	width: 50px;
+}
 .newappIcon {
 	padding-top: 10%;
 	display: block;

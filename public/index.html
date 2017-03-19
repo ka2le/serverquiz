@@ -14,36 +14,9 @@
 
 </script>
   <body onload="onload()">
-		<div id="container" class="container">
-			<input type="text">
-			<input type="button" value="Become HOST" onclick="send('iHost')">
-			
-			<input type="button" value="become player" onclick="send('iPlayer')">
-			<input type="button" value="send Answer A" onclick="send('Answer_A')">
-		
-		</div>
-		<div id="host" class="container">
-			<h1>host</h1><br>
-			score player1: <label id="scorePlayer1" >0</label><br>
-			score player2: <label id="scorePlayer2" >0</label><br><br>
-			<label id="theQuestion" >Question goes here</label>
-		</div>
-		<div id="pick" class="container">
-			
-			<h1>pick</h1>
-			<input type="button" id="playerbutton1" value="player 1" onclick="startPlayer(1)" class="bigbutton">
-			<input type="button" id="playerbutton2" value="player 2" onclick="startPlayer(2)" class="bigbutton">
-			
-		</div>
-		<div id="player" class="container">
-			<h1>player: <label id="playerNumber" value="0"></h1>
-			<div id="optionButtons">
-				<input type="button" id="optionA" value="A" onclick="send('answer#A')" class="bigbutton">
-				<input type="button" id="optionA" value="B" onclick="send('answer#B')" class="bigbutton">
-				<input type="button" id="optionA" value="C" onclick="send('answer#C')" class="bigbutton">
-				<input type="button" id="optionA" value="D" onclick="send('answer#D')" class="bigbutton">
-			</div>
-		</div>
+			<a href="/hemsidor/serverquiz/public/host.html" >host</a>
+			<a href="/hemsidor/serverquiz/public/player.html#1" >player1</a>
+			<a href="/hemsidor/serverquiz/public/player.html#2" >player2</a>
   </body>
 
 </html>

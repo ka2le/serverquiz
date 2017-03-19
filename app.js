@@ -34,8 +34,7 @@ sockets.on( 'connection', function( client ) {
   clients.push(client);
   console.log("------------------clients------------------------");
   //console.log(clients);
-  console.log("------------------clients[0]------------------------");
-  console.log(clients[0]);
+  //console.log(clients[0]);
   // Echo messages to all clients
   client.on( 'message', function( message ) {
 	console.log(message);
