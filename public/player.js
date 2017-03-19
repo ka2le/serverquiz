@@ -3,6 +3,7 @@ var playerNumber;
 
 function onload(){
 	startConnection();
+	var url = window.location.href;
 	playerNumber = url.split("#")[1];
 	
 }

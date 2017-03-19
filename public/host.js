@@ -30,6 +30,7 @@ function handleInput(data){
 			showNextQ();
 			scoreBoard[0] +=  currentRound[0];
 			scoreBoard[1] +=  currentRound[1];
+			currentQuestion++;
 			currentRound = [0,0]
 			hasAnswered = 0;
 			send("newQ");
