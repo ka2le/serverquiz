@@ -23,7 +23,7 @@ function doSocketMessage( message ) {
   console.log("doSocketMessage");
   // Parse
   var data = JSON.parse( message.data );
-  var text = data.content;
+  var intent = data.intent;
   console.log(intent);
 
 }
