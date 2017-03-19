@@ -50,11 +50,11 @@ sockets.on( 'connection', function( client ) {
 		theHost.send('{"content":"You are host"}');
 		
 	}
-	/*
+	
 	if(content=="iPlayer"){
 		players.push(client);
 		client.send('{"content":"You are player: '+ players.length+'"}');
-	}*/
+	}
     for( var i = 0; i < clients.length; i++ ) {	
        clients[i].send( message );   
     }
