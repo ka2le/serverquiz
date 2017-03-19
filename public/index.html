@@ -7,10 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="stylesheets/style.css">
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
   </head>
 <script>
 var input = null;  
 var socket = null;
+var container;
 function onload(){
 	// Input
 	input = document.querySelector( 'input[type=\'text\']' );  
@@ -19,7 +21,38 @@ function onload(){
 	// WebSocket
 	socket = new WebSocket( 'wss://' + window.location.host );  
 	socket.addEventListener( 'message', doSocketMessage );
-
+	container = document.getElementById("container");
+	var url = window.location.href;
+	var type= url.split("#")[1];
+	var test = '{"content":"iHost"}';
+	
+	console.log(type);
+	$(".container").each(function() {
+			$( this ).hide();
+		});
+	
+	if(type == null){
+		$("#pick").show();
+		send("startPlayer");	
+	}else{
+		if(type=="host"){
+			$("#host").show();
+		}else{
+			
+			var value = type.split("=")[1];
+			if(value == 1){
+				startPlayer(1);
+			}
+			if(value == 2){
+				startPlayer(2);
+			}
+		}
+		
+	}
+	if(type == "old"){
+		$("#container").show();
+	}
+	
 }
 
 // Keyboard
@@ -39,16 +72,26 @@ console.log("doInputKey");
 
 // Message
 function doSocketMessage( message ) {  
-  var data = null;
-  var element = null;
-	console.log("doSocketMessage");
+  console.log("doSocketMessage");
   // Parse
-  data = JSON.parse( message.data );
-	console.log(message);
+  var data = JSON.parse( message.data );
+  var text = data.content;
+  console.log(text);
+  var intent = text.split("#")[0];
+  if(intent == "hidePlayer"){
+	var value = text.split("#")[1];
+	if(value == 1){
+		$("#playerbutton1").hide();
+	}
+	if(value == 2){
+		$("#playerbutton2").hide();
+	}
+  }
+  //console.log(message);
   // Build and append
-  element = document.createElement( 'p' );
-  element.innerHTML = data.content;
-  document.body.appendChild( element );
+  //element = document.createElement( 'p' );
+  //element.innerHTML = data.content;
+  //document.body.appendChild( element );
 }
 
 
@@ -60,12 +103,52 @@ function send(text){
 
 }
 
+function startPlayer(number){
+	$(".container").each(function() {
+		$( this ).hide();
+	});	
+	$("#player").show();
+	if(number == 1){
+		send('iPlayer_1');
+		//document.location.href += "#player=1";
+		updateUrl("#player=1");
+	}
+	if(number == 2){
+		send('iPlayer_2');
+		updateUrl("#player=2");
+	}
+	document.getElementById("playerNumber").value = number;
+	
+}
+function updateUrl(addText){
+	window.history.pushState('page2', 'Title', addText);
+
+}
 </script>
   <body onload="onload()">
-		<input type="text">
-		<input type="button" value="Become HOST" onclick="send('iHost')">
-		<input type="button" value="become player" onclick="send('iPlayer')">
-		<input type="button" value="send Answer A" onclick="send('Answer_A')">
+		<div id="container" class="container">
+			<input type="text">
+			<input type="button" value="Become HOST" onclick="send('iHost')">
+			
+			<input type="button" value="become player" onclick="send('iPlayer')">
+			<input type="button" value="send Answer A" onclick="send('Answer_A')">
+		
+		</div>
+		<div id="host" class="container">
+			<h1>host</h1>
+			
+		</div>
+		<div id="pick" class="container">
+			
+			<h1>pick</h1>
+			<input type="button" id="playerbutton1" value="player 1" onclick="startPlayer(1)" class="bigbutton">
+			<input type="button" id="playerbutton2" value="player 2" onclick="startPlayer(2)" class="bigbutton">
+			
+		</div>
+		<div id="player" class="container">
+			<h1>player: <label id="playerNumber" value="0"></h1>
+			
+		</div>
   </body>
 
 </html>

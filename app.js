@@ -24,6 +24,8 @@ console.log("Started");
 
 var theHost;
 var players = [];
+var player1 = "";
+var player2 = "";
 // Listeners
 sockets.on( 'connection', function( client ) {  
   // Debug
@@ -43,25 +45,50 @@ sockets.on( 'connection', function( client ) {
 	//client.send(message);
 	//console.log(sockets.clients);
 	console.log("----------------------------------");
-
-	if(message=='{"content":"iHost"}'){
+	var theContent = message.split(":")[1];
+	theContent = theContent.split('"')[1];
+	var intent = theContent.split("#")[0];
+	if(intent=="iHost"){
 		console.log("iHost")
 		theHost = client;
-		theHost.send('{"content":"You are host"}');
-		console.log(theHost);
+		sendTo(theHost, "youarehost");
+		//theHost.send('{"content":"You are host"}');
+		//console.log(theHost);
+		player1 = "";
+		player2 = "";
 	}
 	
-	if(message=="iPlayer"){
-		
+	if(intent=="iPlayer"){	
 		players.push(client);
 		client.send('{"content":"You are player: '+ players.length+'"}');
+	}
+	if(intent=="iPlayer_2"){	
+		player2 = client;
+		client.send('{"content":"youareplayer#2"}');
+	}
+	if(intent=="iPlayer_1"){	
+		player2 = client;
+		client.send('{"content":"youareplayer#2"}');
+	}
+	if(intent=="startPlayer"){
+		var hidePlayer = "";
+		if(player1 != ""){
+			hidePlayer += "1";
+		}
+		if(player2 != ""){
+			hidePlayer += "2";
+		}
+		//client.send("#playerLeft#1")
+		sendTo(client, "hidePlayer#"+)
 	}
     for( var i = 0; i < clients.length; i++ ) {	
        clients[i].send( message );   
     }
   } );
 } );
-
+function sendTo(theClient, text){
+	theClient.send('{"content":"'+text+'"}');
+}
 // Start
 server.on( 'request', app );  
 server.listen( environment.port, function() {  
