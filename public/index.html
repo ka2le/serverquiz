@@ -13,6 +13,7 @@
 var input = null;  
 var socket = null;
 var container;
+var iAm;
 function onload(){
 	// Input
 	input = document.querySelector( 'input[type=\'text\']' );  
@@ -37,6 +38,7 @@ function onload(){
 	}else{
 		if(type=="host"){
 			$("#host").show();
+			iAm = "host";
 		}else{
 			
 			var value = type.split("=")[1];
@@ -87,6 +89,7 @@ function doSocketMessage( message ) {
 		$("#playerbutton2").hide();
 	}
   }
+  
   //console.log(message);
   // Build and append
   //element = document.createElement( 'p' );
@@ -110,17 +113,20 @@ function startPlayer(number){
 	$("#player").show();
 	if(number == 1){
 		send('iPlayer_1');
+		iAm = "player1";
 		//document.location.href += "#player=1";
 		updateUrl("#player=1");
 	}
 	if(number == 2){
 		send('iPlayer_2');
 		updateUrl("#player=2");
+		iAm = "player2";
 	}
 	document.getElementById("playerNumber").value = number;
 	
 }
 function updateUrl(addText){
+	addText += "#"+iAm;
 	window.history.pushState('page2', 'Title', addText);
 
 }
@@ -136,7 +142,7 @@ function updateUrl(addText){
 		</div>
 		<div id="host" class="container">
 			<h1>host</h1>
-			
+			<label id="theQuestion" value="Questions goes here">
 		</div>
 		<div id="pick" class="container">
 			
@@ -147,7 +153,12 @@ function updateUrl(addText){
 		</div>
 		<div id="player" class="container">
 			<h1>player: <label id="playerNumber" value="0"></h1>
-			
+			<div id="optionButtons">
+				<input type="button" id="optionA" value="A" onclick="send('answer#A')" class="bigbutton">
+				<input type="button" id="optionA" value="B" onclick="send('answer#B')" class="bigbutton">
+				<input type="button" id="optionA" value="C" onclick="send('answer#C')" class="bigbutton">
+				<input type="button" id="optionA" value="D" onclick="send('answer#D')" class="bigbutton">
+			</div>
 		</div>
   </body>
 

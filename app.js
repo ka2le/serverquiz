@@ -79,7 +79,7 @@ sockets.on( 'connection', function( client ) {
 			hidePlayer += "2";
 		}
 		//client.send("#playerLeft#1")
-		sendTo(client, "hidePlayer#"+)
+		sendTo(client, "hidePlayer#"+hidePlayer);
 	}
     for( var i = 0; i < clients.length; i++ ) {	
        clients[i].send( message );   
