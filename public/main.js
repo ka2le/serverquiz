@@ -17,6 +17,18 @@ function send(intent, value){
 	socket.send( JSON.stringify( message ) );	 
 
 }
+
+
+function doSocketMessage( message ) {  
+  console.log("doSocketMessage");
+  // Parse
+  var data = JSON.parse( message.data );
+  var text = data.content;
+  console.log(intent);
+
+}
+
+
 /*
 var container;
 var iAm;
