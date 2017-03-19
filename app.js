@@ -39,6 +39,24 @@ sockets.on( 'connection', function( client ) {
   // Echo messages to all clients
   client.on( 'message', function( message ) {
 	console.log(message);
+    for( var i = 0; i < clients.length; i++ ) {	
+       clients[i].send( message );   
+    }
+  } );
+} );
+function sendTo(theClient, text){
+	theClient.send('{"content":"'+text+'"}');
+}
+// Start
+server.on( 'request', app );  
+server.listen( environment.port, function() {  
+  console.log("environment.url");
+  console.log( environment.url );
+} );
+
+
+
+	/*console.log(message);
 	//console.log("sockets: ");
 	//var data = JSON.parse( message );
 	//console.log(data)
@@ -88,25 +106,7 @@ sockets.on( 'connection', function( client ) {
 		var theAnswer = contentArray[1];
 		sendTo(theHost, ("playerAnswer#"+who+"#"+theAnswer));
 		
-	}
-    for( var i = 0; i < clients.length; i++ ) {	
-       clients[i].send( message );   
-    }
-  } );
-} );
-function sendTo(theClient, text){
-	theClient.send('{"content":"'+text+'"}');
-}
-// Start
-server.on( 'request', app );  
-server.listen( environment.port, function() {  
-  console.log("environment.url");
-  console.log( environment.url );
-} );
-
-
-
-
+	}*/
 
 
 
