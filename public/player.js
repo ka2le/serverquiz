@@ -5,6 +5,11 @@ function onload(){
 	startConnection();
 	var url = window.location.href;
 	playerNumber = url.split("#")[1];
+	if(playerNumber == "undefined"){
+		$("#pick").show();
+	}else{
+		document.getElementById("playerNumber").innerHTML =playerNumber;
+	}
 	
 }
 
