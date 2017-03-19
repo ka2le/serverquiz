@@ -32,6 +32,7 @@ function handleInput(data){
 			scoreBoard[1] +=  currentRound[1];
 			currentRound = [0,0]
 			hasAnswered = 0;
+			send("newQ");
 		}
 	}
 	console.log(data);
@@ -45,6 +46,7 @@ function showNextQ(){
 	for(var i= 1; i<5; i++){
 		document.getElementById("A"+i).innerHTML = theQuestions[currentQuestion][i];
 	}
+	
 	
 }
 
