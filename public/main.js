@@ -12,7 +12,7 @@ function send(intent, value){
       intent: intent,
 	  value: value,
 	  sender: role,
-	  number: playerNumber
+	  playerNumber: playerNumber
     };
 	socket.send( JSON.stringify( message ) );	 
 
@@ -24,8 +24,8 @@ function doSocketMessage( message ) {
   // Parse
   var data = JSON.parse( message.data );
   var intent = data.intent;
-  console.log(intent);
-
+  //console.log(intent);
+  handleInput(data);
 }
 
 

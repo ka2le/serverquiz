@@ -55,64 +55,6 @@ server.listen( environment.port, function() {
 
 
 
-	/*console.log(message);
-	//console.log("sockets: ");
-	//var data = JSON.parse( message );
-	//console.log(data)
-	//var content = data.content;
-	//client.send(message);
-	//console.log(sockets.clients);
-	console.log("----------------------------------");
-	var theContent = message.split(":")[1];
-	theContent = theContent.split('"')[1];
-	var contentArray = theContent.split("#");
-	var intent = contentArray[0];
-	if(intent=="iHost"){
-		console.log("iHost")
-		theHost = client;
-		sendTo(theHost, "youarehost");
-		//theHost.send('{"content":"You are host"}');
-		//console.log(theHost);
-		player1 = "";
-		player2 = "";
-	}
-	
-	if(intent=="iPlayer"){	
-		players.push(client);
-		client.send('{"content":"You are player: '+ players.length+'"}');
-	}
-	if(intent=="iPlayer_2"){	
-		player2 = client;
-		client.send('{"content":"youareplayer#2"}');
-	}
-	if(intent=="iPlayer_1"){	
-		player2 = client;
-		client.send('{"content":"youareplayer#2"}');
-	}
-	if(intent=="startPlayer"){
-		var hidePlayer = "";
-		if(player1 != ""){
-			hidePlayer += "1";
-		}
-		if(player2 != ""){
-			hidePlayer += "2";
-		}
-		//client.send("#playerLeft#1")
-		sendTo(client, "hidePlayer#"+hidePlayer);
-	}
-	if(intent=="answer"){
-		var who = contentArray[contentArray.length-1];
-		var theAnswer = contentArray[1];
-		sendTo(theHost, ("playerAnswer#"+who+"#"+theAnswer));
-		
-	}*/
-
-
-
-
-
-
-
 //------------------------------------------------------------------------------
 // node.js starter application for Bluemix
 //------------------------------------------------------------------------------
