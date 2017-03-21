@@ -4,7 +4,26 @@ var playerNumber = 0;
 var scoreBoard = [0, 0];
 var currentRound = [0,0];
 var  currentQuestion = 0;
-var theQuestions = [["the question","answerA","answerB","answerC correct","answerD","3"], ["the question2","answerA2 correct","answerB2","answerC2","answerD2","1"]];
+var theQuestions = [
+["In South Dakota it's illegal to fall down and sleep where?",
+"In A Cheese Factory",
+"In School",
+"In Any Park",
+"In Your Own Bathtub",
+"1"], 
+["The Average American does what 22 times a day?",
+"Yawn",
+"Open Facebook",
+"Fart",
+"Opens Fridge",
+"4"], 
+["the question",
+"answerA",
+"answerB",
+"answerC correct",
+"answerD",
+"3"], 
+["the question2","answerA2 correct","answerB2","answerC2","answerD2","1"]];
 var answers = [];
 var hasAnswered = 0;
 function onload(){
@@ -38,6 +57,9 @@ function newRound(){
 	scoreBoard[1] +=  currentRound[1];
 	updateScore();
 	currentQuestion++;
+	if(currentQuestion>theQuestions.length){
+		currentQuestion = 0;
+	}
 	currentRound = [0,0]
 	hasAnswered = 0;
 	send("newQ");	
@@ -52,8 +74,9 @@ function updateScore(){
 
 function showNextQ(){
 	document.getElementById("theQuestion").innerHTML = theQuestions[currentQuestion][0];
+	var ABCD = ['A','B','C','D']
 	for(var i= 1; i<5; i++){
-		document.getElementById("A"+i).innerHTML = theQuestions[currentQuestion][i];
+		document.getElementById("A"+i).innerHTML = ABCD[i-1]+": "+theQuestions[currentQuestion][i];
 	}
 	
 	

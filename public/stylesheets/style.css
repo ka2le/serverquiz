@@ -3,42 +3,91 @@
  */
 
 body,html {
-	background-color: #3b4b54; width : 100%;
-	height: 100%;
+	background-color: rgb(244, 248, 255);
+	//width : 100%;
+	//height: 100%;
+	font-size:2vh;
+	overflow:hidden;
+	padding:0px;
+	margin:0px;
 	//margin: 0 auto;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #ffffff;
+	//font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	//font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+	//font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	color: black;
 	text-align:center;
-}
-.square{
-	
-
-}
-
-
-.square{
- position:absolute;
- //background-color:red;
- height:28vh;
- margin-left:10vw;
- width: 35vw;
- padding-top: 5vh;
- font-size:2em;
- padding-left: 2vw;
- 
 }
 
 .bigbutton{
+	//border: 3px solid;
+	//border-color: rgb(172,157,222);
+	background-color: rgb(157, 229, 103);
+	border-radius: 7px;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+#top{
+	border-bottom: 2px solid;
+	border-color: rgb(186, 245, 255);
+	background-color: rgb(16, 75, 114);
+	color:rgb(226, 241, 255);
+
+}
+
+
+
+
+
+#top{
+	//text-align:center;
+	top:0px;
+	width:100vw;
+	padding-top:4vh;
+	padding:2 vh;
+	min-height:15vh;
+}
+.bigbutton{
 	height: inherit;
 	width:inherit;
-	font-size: 5em;
-	background-color: white;
+	font-size: 2em;
+	border: none;
+	
 }
+
+label{
+	//font-size:2em;
+}
+.square{
+	//border: 1px solid;
+	//border-color: rgb(178, 133, 117);
+	//background-color: rgb(255, 100, 48);
+ position:absolute;
+ //background-color:red;
+ height:23vh;
+ margin-left:6vw;
+ 
+ width: 35vw;
+ padding: 3vh;
+ font-size:3em;
+ //padding-left: 2vw;
+ margin-top:6vh;
+ 
+ 
+}
+#container{
+	width:100vw;
+	height:100vh;
+	margin:0px;
+	padding:0px;
+	position:absolute;
+}
+
+
 .rightSquares{
- right: 10vw;
+ right: 6vw;
 }
 .bottomSquares{
- bottom: 10vh;
+ bottom: 6vh;
 }
 .score1{
 	left: 15vw;
@@ -49,13 +98,23 @@ body,html {
 	right:15vw;
 	position:absolute;
 }
+#theQuestion{
+	font-size:4.4em;
+	width:80vw;
+
+}
+.playerText{
+	padding-bottom: 4vh;
+	//background-color:green;
+}
 #sent{
 	//display:none;
 	font-size: 5em;
 }
+
 h1 {
 	font-weight: bold;
-	font-size: 2em;
+	font-size: 4em;
 }
 
 
