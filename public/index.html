@@ -10,13 +10,47 @@
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 	 <script type="text/javascript" src="main.js"></script>
   </head>
-<script>
-
+<style>
+	.button {
+    display: block;
+    width: 30vw;
+    height: 10vh;
+    background: #4E9CAF;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+	margin:10px;
+	text-decoration:none;
+	left:45vw;
+	//position:absolute;
+	font-size: 4em;
+	margin-left:-5vw;
+}
+.center{
+ position:absolute;
+ left:40vw;
+}
+.bottom{
+	position:absolute;
+	bottom: 10vh;
+	font-size:2em;
+	
+}
+</style>
 </script>
   <body onload="onload()">
+	<div class="center">
+			<a class="button" href="/host.html" >host</a>
+			<a class="button" href="/player.html#1" >player1</a>
+			<a  class="button" href="/player.html#2" >player2</a>
+			</div>
+			<div class="bottom center">
 			<a href="/hemsidor/serverquiz/public/host.html" >host</a>
 			<a href="/hemsidor/serverquiz/public/player.html#1" >player1</a>
 			<a href="/hemsidor/serverquiz/public/player.html#2" >player2</a>
+			</div>
   </body>
 
 </html>
