@@ -102,7 +102,7 @@ function newRound(){
 	scoreBoard[0] +=  currentRound[0];
 	scoreBoard[1] +=  currentRound[1];
 	updateScore();
-	setTimeout(newRoundPart2 , 400);
+	setTimeout(newRoundPart2 , 4000);
 }
 function newRoundPart2(){
 	currentQuestion++;
