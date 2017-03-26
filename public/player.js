@@ -6,6 +6,7 @@ function onload(){
 	//$("#sent").hide();
 	//console.log($("#sent"));
 	document.getElementById("sent").style.display = "none";
+	document.getElementById("result").style.display = "none";
 	var url = window.location.href;
 	playerNumber = url.split("#")[1];
 
@@ -16,7 +17,26 @@ function onload(){
 	}
 	
 }
-
+function testFunction(){
+	var message = {
+      intent: "score",
+	  value: 1,
+	  value2: 1,
+	  sender: role,
+	  playerNumber: playerNumber
+    };
+	handleInput(message);
+}
+function testFunction2(){
+	var message = {
+      intent: "newQ",
+	  value: 1,
+	  value2: 1,
+	  sender: role,
+	  playerNumber: playerNumber
+    };
+	handleInput(message);
+}
 
 function handleInput(data){
 	console.log(" handleInput(data)");
@@ -27,6 +47,22 @@ function handleInput(data){
 			$( this ).show();
 		});	
 		document.getElementById("sent").style.display = "none";
+		document.getElementById("result").style.display = "none";
+	}
+	if(intent=="score"){
+		var playerScoreNumber = data.value;
+		if(playerScoreNumber == playerNumber){
+			document.getElementById("sent").style.display = "none";
+			var theScore = data.value2;
+			var text = ""
+			if(theScore== 1){
+				text = "Correct!";
+			}else{
+				text = "Wrong";
+			}
+			document.getElementById("result").innerHTML = text;
+			document.getElementById("result").style.display = "block";
+		}
 	}
 	
 }

@@ -4,6 +4,48 @@ var playerNumber = 0;
 var scoreBoard = [0, 0];
 var currentRound = [0,0];
 var  currentQuestion = 0;
+//Music Questions
+var theQuestions = [
+["Which of these songs was released first?",
+"Tik Tok - Kesha",
+"Thrift Shop - Macklemore",
+"Bad Day - Daniel Powter",
+"Somebody That I Used to Know - Gotye",
+"3"], 
+["In the song Imagine by John Lennon he tells us to imagine a world without this:",
+"Money",
+"First World",
+"Third World",
+"Possessions",
+"4"], 
+["All these artist/bands are on the Billboard Top 10 of All-Time List. But who is number 1?",
+"The Beatles",
+"Michael Jackson",
+"Elvis Presley",
+"Madonna",
+"1"],
+["Which of these four songs is NOT song with Bruno Mars?",
+"Billionaire",
+"Grenade",
+"That Way",
+"Uptown Funk",
+"3"],
+["The artist with most views in total on Youtube is Justin Beiber. But how many views does he have?",
+"14 670 000 000",
+"8 360 000 000",
+"3 450 000",
+"938 000 000",
+"1"],  
+["Respect by Aretha Franklin is a classic. Finish the lyrics: R-E-S-P-E-C-T ...",
+"Do not let them get to me",
+"Find out what it means to me",
+"You should really let me be",
+"I am getting you to see",
+"2"],   
+["Well Played","Goodbye","Player 1","And","Player 2","3"]];
+/*Other questions
+
+
 var theQuestions = [
 ["In South Dakota it's illegal to fall down and sleep where?",
 "In A Cheese Factory",
@@ -23,7 +65,7 @@ var theQuestions = [
 "answerC correct",
 "answerD",
 "3"], 
-["the question2","answerA2 correct","answerB2","answerC2","answerD2","1"]];
+["the question2","answerA2 correct","answerB2","answerC2","answerD2","1"]];*/
 var answers = [];
 var hasAnswered = 0;
 function onload(){
@@ -51,11 +93,18 @@ function handleInput(data){
 	console.log(data);
 	
 }
+function testNewRound(){
+	currentRound[0] = 1;
+	currentRound[1] = 0; 
+	newRound();
+}
 function newRound(){
-	showNextQ();
 	scoreBoard[0] +=  currentRound[0];
 	scoreBoard[1] +=  currentRound[1];
 	updateScore();
+	setTimeout(newRoundPart2 , 400);
+}
+function newRoundPart2(){
 	currentQuestion++;
 	if(currentQuestion>theQuestions.length){
 		currentQuestion = 0;
@@ -63,11 +112,39 @@ function newRound(){
 	currentRound = [0,0]
 	hasAnswered = 0;
 	send("newQ");	
-
+	showNextQ();
 }
 function updateScore(){
 	document.getElementById("scorePlayer1").innerHTML = "Score Player1: "+scoreBoard[0];
+	send("score", 1, currentRound[0]);
 	document.getElementById("scorePlayer2").innerHTML = "Score Player2: "+scoreBoard[1];
+	send("score", 2, currentRound[1]);
+	if(currentRound[0] == 1 && currentRound[1] == 1){
+		document.getElementById("theQuestion").innerHTML = "Well Done Both Of You!"
+	}
+	if(currentRound[0] == 0 && currentRound[1] == 0){
+		document.getElementById("theQuestion").innerHTML = "Better luck next time!"
+	}
+	if(currentRound[0] == 1 && currentRound[1] == 0){
+		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 1"
+	}
+	if(currentRound[0] == 0 && currentRound[1] == 1){
+		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 2"
+	}
+	for(var i= 1; i<5; i++){
+		document.getElementById("A"+i).innerHTML = " ";
+	}
+	if(currentRound[0] == 1){
+		document.getElementById("A1").innerHTML = "Player 1 was Right";
+	}else{
+		document.getElementById("A1").innerHTML = "Player 1 was Wrong";
+	}
+	if(currentRound[1] == 1){
+		document.getElementById("A2").innerHTML = "Player 2 was Right";
+	}else{
+		document.getElementById("A2").innerHTML = "Player 2 was Wrong";
+	}
+	
 	
 }
 

@@ -6,11 +6,12 @@ function startConnection(){
 	socket.addEventListener( 'message', doSocketMessage );
 }
 
-function send(intent, value){
+function send(intent, value, value2){
 	
 	var message = {
       intent: intent,
 	  value: value,
+	  value2: value2,
 	  sender: role,
 	  playerNumber: playerNumber
     };

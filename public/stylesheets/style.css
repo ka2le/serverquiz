@@ -55,7 +55,8 @@ box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.75);
  background-image: -ms-linear-gradient(top, #23538A, #0f212e);
  background-image: -o-linear-gradient(top, #23538A, #0f212e);
  background-image: linear-gradient(to bottom, #23538A, #0f212e);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#2E6DB5, endColorstr=#23538A);
-	min-height:12vh;
+	min-height:20vh;
+	
 }
 
 
@@ -89,7 +90,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#287bb7', end
 .bigbutton{
 	height: inherit;
 	width:inherit;
-	font-size: 2em;
+	font-size: 0.5em;
 	border: none;
 	
 }
@@ -110,9 +111,23 @@ label{
  padding: 3vh;
  font-size:3em;
  //padding-left: 2vw;
- margin-top:6vh;
+ margin-top:20vh;
  
- 
+}
+.rightSquares{
+ right: 6vw;
+}
+.bottomSquares{
+ bottom: 6vh;
+}
+#player .square{
+	 margin-top:15vh;
+}
+#player .bottomSquares{
+ bottom: 15vh;
+}
+#host .square{
+ margin-top:10vh;
 }
 .square label{
 	//color:green;
@@ -126,6 +141,44 @@ label{
 	position:absolute;
 
 }
+
+
+.score1{
+	left: 15vw;
+	position:absolute;
+
+}
+.score2{
+	right:15vw;
+	position:absolute;
+}
+#theQuestion{
+	font-size:4.4em;
+	width:80vw;
+
+}
+.playerText{
+	padding-bottom: 4vh;
+	//background-color:green;
+}
+#sent{
+	//display:none;
+	//font-size: 5em;
+}
+
+h1 {
+	//font-weight: bold;
+	//font-size: 4em;
+}
+
+html {
+
+font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+
+
+
 .shape {
 	position:absolute;
 	bottom: 0px;
@@ -182,42 +235,3 @@ label{
   -webkit-transform: skew(-35deg);
   transform: skew(-65deg);
 }
-.rightSquares{
- right: 6vw;
-}
-.bottomSquares{
- bottom: 6vh;
-}
-.score1{
-	left: 15vw;
-	position:absolute;
-
-}
-.score2{
-	right:15vw;
-	position:absolute;
-}
-#theQuestion{
-	font-size:4.4em;
-	width:80vw;
-
-}
-.playerText{
-	padding-bottom: 4vh;
-	//background-color:green;
-}
-#sent{
-	//display:none;
-	font-size: 5em;
-}
-
-h1 {
-	//font-weight: bold;
-	font-size: 4em;
-}
-
-html {
-
-font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-}
-
