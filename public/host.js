@@ -4,6 +4,7 @@ var playerNumber = 0;
 var scoreBoard = [0, 0];
 var currentRound = [0,0];
 var  currentQuestion = 0;
+var sound = true;
 //Music Questions
 var theQuestions = [
 ["Which of these songs was released first?",
@@ -121,15 +122,19 @@ function updateScore(){
 	send("score", 2, currentRound[1]);
 	if(currentRound[0] == 1 && currentRound[1] == 1){
 		document.getElementById("theQuestion").innerHTML = "Well Done Both Of You!"
+		playSound("welldone");
 	}
 	if(currentRound[0] == 0 && currentRound[1] == 0){
 		document.getElementById("theQuestion").innerHTML = "Better luck next time!"
+		playSound("betterluck");
 	}
 	if(currentRound[0] == 1 && currentRound[1] == 0){
 		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 1"
+		playSound("congratsp1");
 	}
 	if(currentRound[0] == 0 && currentRound[1] == 1){
 		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 2"
+		playSound("congratsp2");
 	}
 	for(var i= 1; i<5; i++){
 		document.getElementById("A"+i).innerHTML = " ";
@@ -147,10 +152,26 @@ function updateScore(){
 	
 	
 }
-
+function playSound(filename){
+	if(sound){
+		var audio = new Audio("sounds/"+filename+".ogg");
+		audio.play();
+	}
+}
+function toggelSound(){
+	if(sound){
+		$("#nosoundImg").show();
+		sound = false;
+	}else{
+		$("#nosoundImg").hide();
+		sound = true;
+		
+	}
+}
 
 function showNextQ(){
 	document.getElementById("theQuestion").innerHTML = theQuestions[currentQuestion][0];
+	playSound("q"+currentQuestion);
 	var ABCD = ['A','B','C','D']
 	for(var i= 1; i<5; i++){
 		document.getElementById("A"+i).innerHTML = ABCD[i-1]+": "+theQuestions[currentQuestion][i];

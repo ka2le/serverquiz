@@ -175,6 +175,34 @@ html {
 
 font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
+#sound{
+	position:absolute;
+	top:1vh;
+	right: 1vw;
+	z-index:11;
+}
+#soundImg{
+	position:absolute;
+	height: 5vh;
+	width: 5vh;
+	top:0px;
+	right:0px;
+}
+#nosoundImg{
+	position:absolute; 
+	height: 4vh;
+	width: 4vh;
+	top:0.5vh;
+	right:0.5vh;
+	display:none;
+	opacity:0.7;
+}
+#soundImg:hover, #nosoundImg:hover{
+	cursor:pointer;
+}
+#nosoundImg{
+	z-index:20;
+}
 
 
 
