@@ -30,6 +30,7 @@ function doSocketMessage( message ) {
 }
 
 function playSoung(){
+	var audio = new Audio('hello_world.mp3');
 	audio.play();
 
 }
