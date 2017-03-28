@@ -3,14 +3,17 @@ var playerNumber;
 var joining;
 var joinNumber;
 function onload(){
-	startConnection();
-	//$("#sent").hide();
-	//console.log($("#sent"));
 	document.getElementById("sent").style.display = "none";
 	document.getElementById("result").style.display = "none";
 	var url = window.location.href;
 	playerNumber = url.split("#")[1];
 	console.log(playerNumber);
+	startConnection();
+}
+function continueOnload(){
+	//$("#sent").hide();
+	//console.log($("#sent"));
+	
 	if(playerNumber == null){
 		//$("#pick").show();
 		document.getElementById("playerNumber").innerHTML = ("Pick Player Number");
@@ -24,7 +27,7 @@ function onload(){
 		iAmReady();
 		waitForOthers();
 	}
-	
+
 }
 function iAmReady(){
 	console.log("iAmReady: " +playerNumber);
@@ -84,6 +87,7 @@ function handleInput(data){
 			completLogin();
 		}
 	}else{
+		/*If players handle player number conflict by themselves:
 		if(intent=="loginas"){
 			var theNumber = data.value;
 			if(theNumber==playerNumber){
@@ -91,7 +95,7 @@ function handleInput(data){
 			}else{
 				send("loginFree");
 			}
-		}
+		}*/
 	}	
 	if(intent=="starting" || intent=="newQ" ){
 		 showOptions();

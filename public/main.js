@@ -4,6 +4,10 @@ function startConnection(){
 	// WebSocket
 	socket = new WebSocket( 'wss://' + window.location.host );  
 	socket.addEventListener( 'message', doSocketMessage );
+	socket.onopen = function () {
+		  console.log("Connected");
+		  continueOnload();
+	};
 }
 
 function send(intent, value, value2){
