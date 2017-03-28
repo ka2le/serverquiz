@@ -29,7 +29,10 @@ function doSocketMessage( message ) {
   handleInput(data);
 }
 
+function playSoung(){
+	audio.play();
 
+}
 /*
 var container;
 var iAm;
