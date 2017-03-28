@@ -93,6 +93,7 @@ function handleInput(data){
 }
 function start(){
 	showNextQ();
+	send("starting");
 }
 function testJoin(){
 	var message = {

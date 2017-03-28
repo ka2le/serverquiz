@@ -22,6 +22,7 @@ function onload(){
 	}else{
 		document.getElementById("playerNumber").innerHTML = ("Player: "+playerNumber);
 		iAmReady();
+		waitForOthers();
 	}
 	
 }
@@ -42,16 +43,31 @@ function completLogin(){
 	playerNumber = joinNumber;
 	document.getElementById("playerNumber").innerHTML = ("Player: "+playerNumber);
 	window.history.pushState('page2', 'Title', '#'+playerNumber);
-	$("#option1").show();
-	$("#option2").show();
-	$(".bottomSquares").show();
+	//$("#option1").show();
+	//$("#option2").show();
+	//$(".bottomSquares").show();
+	
 	$("#option1").attr('value', 'A');
 	$("#option1").attr('onclick', 'answer(1)');
 	$("#option2").attr('value', 'B');
 	$("#option2").attr('onclick', 'answer(2)');
 	iAmReady();
+	waitForOthers();
 }
-
+function waitForOthers(){
+	$(".answerButton").each(function() {
+		$( this ).hide();
+	});	
+	document.getElementById("result").innerHTML = "Waiting for other players";
+	document.getElementById("result").style.display = "block";
+}
+function showOptions(){
+	$(".answerButton").each(function() {
+		$( this ).show();
+	});	
+	document.getElementById("sent").style.display = "none";
+	document.getElementById("result").style.display = "none";
+}
 function handleInput(data){
 	console.log(" handleInput(data)");
 	console.log(data);
@@ -74,12 +90,8 @@ function handleInput(data){
 			}
 		}
 	}	
-	if(intent=="newQ"){
-		$(".answerButton").each(function() {
-			$( this ).show();
-		});	
-		document.getElementById("sent").style.display = "none";
-		document.getElementById("result").style.display = "none";
+	if(intent=="starting" || intent=="newQ" ){
+		 showOptions();
 	}
 	if(intent=="score"){
 		var playerScoreNumber = data.value;
