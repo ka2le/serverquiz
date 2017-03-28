@@ -29,8 +29,13 @@ function doSocketMessage( message ) {
   handleInput(data);
 }
 
-function playSoung(){
+function playSound(){
 	var audio = new Audio('hello_world.mp3');
+	audio.play();
+
+}
+function playSound2(){
+	var audio = new Audio('sorry.ogg');
 	audio.play();
 
 }
