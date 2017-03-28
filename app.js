@@ -45,6 +45,7 @@ sockets.on( 'connection', function( client ) {
 			clients[i].send( message ); 
 		}catch{
 			console.log("Could not send to Client " + i);
+			sendTo(client, "Failed to send some other client with i: " +i);
 		}	 
     }
   } );
