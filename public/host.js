@@ -52,7 +52,9 @@ function onload(){
 	//console.log(theQuestions[currentQuestion][0]);
 	//showNextQ();
 }
-
+function continueOnload(){
+	console.log("continueOnload does nothing now on host.");
+}
 
 function handleInput(data){
 	console.log(" handleInput(data)");
