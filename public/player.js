@@ -26,6 +26,7 @@ function onload(){
 	
 }
 function iAmReady(){
+	console.log("iAmReady: " +playerNumber);
 	send("iAmReady");
 }
 function login(tryPlayerNumber){

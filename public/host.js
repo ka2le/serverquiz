@@ -71,6 +71,7 @@ function handleInput(data){
 	}
 	if(intent=="loginas"){
 			var theNumber = data.value;
+			console.log("loginas " +theNumber);
 			if(players[theNumber-1]>0){
 				send("loginTaken");
 			}else{
@@ -80,6 +81,7 @@ function handleInput(data){
 		}
 	if(intent == "iAmReady"){
 		var theNumber = data.playerNumber;
+		console.log("iAmReady " +theNumber);
 		players[theNumber-1]+=2;
 		if(players[0]>0 && players[1]>0){
 			console.log("everyone ready");
@@ -91,6 +93,26 @@ function handleInput(data){
 }
 function start(){
 	showNextQ();
+}
+function testJoin(){
+	var message = {
+      intent: "loginas",
+	  value: 1,
+	  value2: 1,
+	  sender: role,
+	  playerNumber: 1
+    };
+	handleInput(message);
+}
+function testReady(number){
+	var message = {
+      intent: "iAmReady",
+	  value: 1,
+	  value2: 1,
+	  sender: role,
+	  playerNumber: number
+    };
+	handleInput(message);
 }
 function testNewRound(){
 	currentRound[0] = 1;
