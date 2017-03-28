@@ -43,6 +43,12 @@ function playSound2(){
 	audio.play();
 
 }
+function arrayTest(){
+	var theArray = [3,4,5];
+	console.log(theArray);
+	theArray.splice(1, 1);
+	console.log(theArray);
+}
 /*
 var container;
 var iAm;

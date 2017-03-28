@@ -26,14 +26,15 @@ var theHost;
 var players = [];
 var player1 = "";
 var player2 = "";
-
-
+var failedSend = []
+var allowedStrikes = 2;
 
 // Listeners
 sockets.on( 'connection', function( client ) {  
   // Debug
   console.log( 'Connection.' );
   clients.push(client);
+  failedSend.push(0);
   console.log("------------------clients------------------------");
   //console.log(clients);
   //console.log(clients[0]);
@@ -45,6 +46,12 @@ sockets.on( 'connection', function( client ) {
 			clients[i].send( message ); 
 		}catch(err){
 			console.log("Could not send to Client " + i + " error: " +err);
+			failedSend[i]++;
+			if(failedSend[i] > (allowedStrikes-1)){
+				console.log("removing client"+ i);
+				failedSend.splice(i, 1);
+				clients.splice(i, 1);
+			}
 			var forSender = ("Failed to send some other client with i: " +i+" error: " +err);
 			sendTo(client, forSender);
 		}	 
