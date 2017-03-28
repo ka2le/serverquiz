@@ -92,9 +92,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#287bb7', end
 	width:inherit;
 	font-size: 0.5em;
 	border: none;
-	
-}
 
+}
+.answerButton{
+	display:none;
+}
 label{
 	//font-size:2em;
 }
@@ -203,6 +205,7 @@ font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 #nosoundImg{
 	z-index:20;
 }
+
 
 
 

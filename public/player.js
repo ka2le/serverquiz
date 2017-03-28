@@ -17,7 +17,6 @@ function onload(){
 function continueOnload(){
 	//$("#sent").hide();
 	console.log("continueOnload");
-	
 	if(playerNumber == null){
 		//$("#pick").show();
 		document.getElementById("playerNumber").innerHTML = ("Pick Player Number");
@@ -69,9 +68,11 @@ function waitForOthers(){
 	document.getElementById("result").style.display = "block";
 }
 function showOptions(){
+	console.log("showOptions");
 	$(".answerButton").each(function() {
 		$( this ).show();
 	});
+
 	$("#option1").show();
 	$("#option2").show();
 	$(".bottomSquares").show();	
@@ -129,6 +130,17 @@ function answer(theAnswer){
 	//$( "#sent" ).show();
 	document.getElementById("sent").style.display = "block";
 	send("answer", theAnswer);
+}
+
+function testStart(){
+	var message = {
+      intent: "starting",
+	  value: 1,
+	  value2: 1,
+	  sender: "host",
+	  playerNumber: playerNumber
+    };
+	handleInput(message);
 }
 
 function testFunction(){

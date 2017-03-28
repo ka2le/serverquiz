@@ -63,10 +63,15 @@ function handleInput(data){
 		var player = data.playerNumber;
 		var playerAnswer = data.value;
 		var correctAnswer = theQuestions[currentQuestion][5];
-		if (correctAnswer == playerAnswer){
-			currentRound[player-1]++;
+		if(currentRound[player-1]==0){
+			hasAnswered++;
 		}
-		hasAnswered ++;
+		if (correctAnswer == playerAnswer){
+			currentRound[player-1]=1;
+			
+		}else{
+			currentRound[player-1]=-1;
+		}
 		if(hasAnswered>1){
 			newRound();
 		}
@@ -123,8 +128,8 @@ function testNewRound(){
 	newRound();
 }
 function newRound(){
-	scoreBoard[0] +=  currentRound[0];
-	scoreBoard[1] +=  currentRound[1];
+	//scoreBoard[0] +=  currentRound[0];
+	//scoreBoard[1] +=  currentRound[1];
 	updateScore();
 	setTimeout(newRoundPart2 , 4000);
 }
@@ -139,24 +144,24 @@ function newRoundPart2(){
 	showNextQ();
 }
 function updateScore(){
-	document.getElementById("scorePlayer1").innerHTML = "Score Player1: "+scoreBoard[0];
-	send("score", 1, currentRound[0]);
-	document.getElementById("scorePlayer2").innerHTML = "Score Player2: "+scoreBoard[1];
-	send("score", 2, currentRound[1]);
 	if(currentRound[0] == 1 && currentRound[1] == 1){
 		document.getElementById("theQuestion").innerHTML = "Well Done Both Of You!"
+		scoreBoard[0] ++;
+		scoreBoard[1] ++;
 		playSound("welldone");
 	}
-	if(currentRound[0] == 0 && currentRound[1] == 0){
+	if(currentRound[0] < 0 && currentRound[1] < 0){
 		document.getElementById("theQuestion").innerHTML = "Better luck next time!"
 		playSound("betterluck");
 	}
-	if(currentRound[0] == 1 && currentRound[1] == 0){
+	if(currentRound[0] == 1 && currentRound[1] < 0){
 		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 1"
+		scoreBoard[0] ++;
 		playSound("congratsp1");
 	}
-	if(currentRound[0] == 0 && currentRound[1] == 1){
+	if(currentRound[0] < 0 && currentRound[1] == 1){
 		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 2"
+		scoreBoard[1] ++;
 		playSound("congratsp2");
 	}
 	for(var i= 1; i<5; i++){
@@ -172,7 +177,10 @@ function updateScore(){
 	}else{
 		document.getElementById("A2").innerHTML = "Player 2 was Wrong";
 	}
-	
+	document.getElementById("scorePlayer1").innerHTML = "Score Player1: "+scoreBoard[0];
+	send("score", 1, currentRound[0]);
+	document.getElementById("scorePlayer2").innerHTML = "Score Player2: "+scoreBoard[1];
+	send("score", 2, currentRound[1]);
 	
 }
 function playSound(filename){
@@ -191,7 +199,6 @@ function toggelSound(){
 		
 	}
 }
-
 function showNextQ(){
 	document.getElementById("theQuestion").innerHTML = theQuestions[currentQuestion][0];
 	playSound("q"+currentQuestion);
