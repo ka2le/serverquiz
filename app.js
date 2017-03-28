@@ -40,13 +40,23 @@ sockets.on( 'connection', function( client ) {
   // Echo messages to all clients
   client.on( 'message', function( message ) {
 	console.log(message);
-    for( var i = 0; i < clients.length; i++ ) {	
-       clients[i].send( message );   
+    for( var i = 0; i < clients.length; i++ ) {
+		try{
+			clients[i].send( message ); 
+		}catch{
+			console.log("Could not send to Client " + i);
+		}	 
     }
   } );
 } );
 function sendTo(theClient, text){
-	theClient.send('{"content":"'+text+'"}');
+	try{
+		theClient.send('{"content":"'+text+'"}');
+	}catch{
+		console.log("Error in sendTo(theClient, text)");
+	}
+	
+	
 }
 // Start
 server.on( 'request', app );  

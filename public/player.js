@@ -9,10 +9,14 @@ function onload(){
 	playerNumber = url.split("#")[1];
 	console.log(playerNumber);
 	startConnection();
+	console.log(window.location.host);
+	if(window.location.host=="localhost:4330"){
+		continueOnload();
+	}
 }
 function continueOnload(){
 	//$("#sent").hide();
-	//console.log($("#sent"));
+	console.log("continueOnload");
 	
 	if(playerNumber == null){
 		//$("#pick").show();
