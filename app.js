@@ -43,9 +43,10 @@ sockets.on( 'connection', function( client ) {
     for( var i = 0; i < clients.length; i++ ) {
 		try{
 			clients[i].send( message ); 
-		}catch{
-			console.log("Could not send to Client " + i);
-			sendTo(client, "Failed to send some other client with i: " +i);
+		}catch(err){
+			console.log("Could not send to Client " + i + " error: " +err);
+			var forSender = ("Failed to send some other client with i: " +i+" error: " +err);
+			sendTo(client, forSender);
 		}	 
     }
   } );
@@ -53,8 +54,8 @@ sockets.on( 'connection', function( client ) {
 function sendTo(theClient, text){
 	try{
 		theClient.send('{"content":"'+text+'"}');
-	}catch{
-		console.log("Error in sendTo(theClient, text)");
+	}catch(err){
+		console.log("Error in sendTo(theClient, text) Error msg: " + err);
 	}
 	
 	
