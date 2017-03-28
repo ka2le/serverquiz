@@ -64,7 +64,10 @@ function waitForOthers(){
 function showOptions(){
 	$(".answerButton").each(function() {
 		$( this ).show();
-	});	
+	});
+	$("#option1").show();
+	$("#option2").show();
+	$(".bottomSquares").show();	
 	document.getElementById("sent").style.display = "none";
 	document.getElementById("result").style.display = "none";
 }
