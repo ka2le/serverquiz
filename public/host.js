@@ -1,6 +1,6 @@
 var role = "host";
 var playerNumber = 0;
-
+var players = [0,0];
 var scoreBoard = [0, 0];
 var currentRound = [0,0];
 var  currentQuestion = 0;
@@ -44,35 +44,13 @@ var theQuestions = [
 "I am getting you to see",
 "2"],   
 ["Well Played","Goodbye","Player 1","And","Player 2","3"]];
-/*Other questions
 
-
-var theQuestions = [
-["In South Dakota it's illegal to fall down and sleep where?",
-"In A Cheese Factory",
-"In School",
-"In Any Park",
-"In Your Own Bathtub",
-"1"], 
-["The Average American does what 22 times a day?",
-"Yawn",
-"Open Facebook",
-"Fart",
-"Opens Fridge",
-"4"], 
-["the question",
-"answerA",
-"answerB",
-"answerC correct",
-"answerD",
-"3"], 
-["the question2","answerA2 correct","answerB2","answerC2","answerD2","1"]];*/
 var answers = [];
 var hasAnswered = 0;
 function onload(){
 	startConnection();
 	//console.log(theQuestions[currentQuestion][0]);
-	showNextQ();
+	//showNextQ();
 }
 
 
@@ -91,8 +69,28 @@ function handleInput(data){
 			newRound();
 		}
 	}
+	if(intent=="loginas"){
+			var theNumber = data.value;
+			if(players[theNumber-1]>0){
+				send("loginTaken");
+			}else{
+				send("loginFree");
+				players[theNumber-1]+=1;
+			}
+		}
+	if(intent == "iAmReady"){
+		var theNumber = data.playerNumber;
+		players[theNumber-1]+=2;
+		if(players[0]>0 && players[1]>0){
+			console.log("everyone ready");
+			start();
+		}
+	}	
 	console.log(data);
 	
+}
+function start(){
+	showNextQ();
 }
 function testNewRound(){
 	currentRound[0] = 1;
@@ -179,4 +177,31 @@ function showNextQ(){
 	
 	
 }
+
+
+
+
+/*Other questions
+
+
+var theQuestions = [
+["In South Dakota it's illegal to fall down and sleep where?",
+"In A Cheese Factory",
+"In School",
+"In Any Park",
+"In Your Own Bathtub",
+"1"], 
+["The Average American does what 22 times a day?",
+"Yawn",
+"Open Facebook",
+"Fart",
+"Opens Fridge",
+"4"], 
+["the question",
+"answerA",
+"answerB",
+"answerC correct",
+"answerD",
+"3"], 
+["the question2","answerA2 correct","answerB2","answerC2","answerD2","1"]];*/
 
