@@ -111,26 +111,29 @@ function handleInput(data){
 	console.log(" handleInput(data)");
 	var intent = data.intent;
 	if(intent == "answer"){
+		
 		var player = data.playerNumber;
 		var playerAnswer = data.value;
+		console.log("player "+ player +" answered " +playerAnswer);
 		var correctAnswer = theQuestions[currentQuestion][5];
-		var point = -1;
-		
+		var point = -1;		
 		if(correctAnswer == playerAnswer){
 			point = 1;
 		}
 		if(player == 1){
 			if(playerOneAnswer == 0){
 				playerOneAnswer = point;
-				currentRound[player-1]=-1;
+				currentRound[player-1]=point;
 			}
 		}
 		if(player == 2){
 			if(playerTwoAnswer == 0){
-				playerOneAnswer = point;
-				currentRound[player-1]=-1;
+				playerTwoAnswer = point;
+				currentRound[player-1]=point;
 			}
 		}
+		console.log("playerOneAnswer "+ playerOneAnswer);
+		console.log("playerTwoAnswer "+ playerTwoAnswer);
 		if(playerTwoAnswer != 0 && playerOneAnswer != 0){
 			newRound();
 		}
@@ -148,7 +151,7 @@ function handleInput(data){
 	if(intent == "iAmReady"){
 		var theNumber = data.playerNumber;
 		console.log("iAmReady " +theNumber);
-		document.getElementById("scorePlayer"+theNumber).innerHTML = "Player 1: <label>Ready!</label>";
+		document.getElementById("scorePlayer"+theNumber).innerHTML = "Player "+theNumber+": <label>Ready!</label>";
 		players[theNumber-1]+=2;
 		if(players[0]>0 && players[1]>0){
 			console.log("everyone ready");
@@ -156,6 +159,7 @@ function handleInput(data){
 		}
 	}	
 	console.log(data);
+	console.log(data.intent);
 	
 }
 function start(){
@@ -167,7 +171,7 @@ function newRound(){
 	//scoreBoard[0] +=  currentRound[0];
 	//scoreBoard[1] +=  currentRound[1];
 	updateScore();
-	setTimeout(newRoundPart2 , 5000);
+	setTimeout(newRoundPart2 , 4500);
 }
 function newRoundPart2(){
 	currentQuestion++;
@@ -257,7 +261,26 @@ function showNextQ(){
 
 //-------------------------------TEST----------------------------------------------------
 
-
+function testAnswerCorrect(number){
+	var message = {
+      intent: "answer",
+	  value: 3,
+	  value2: 1,
+	  sender: role,
+	  playerNumber: number
+    };
+	handleInput(message);
+}
+function testAnswerWrong(number){
+	var message = {
+      intent: "answer",
+	  value: 1,
+	  value2: 1,
+	  sender: role,
+	  playerNumber: number
+    };
+	handleInput(message);
+}
 function testJoin(){
 	var message = {
       intent: "loginas",
