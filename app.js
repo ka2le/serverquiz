@@ -28,7 +28,7 @@ var player1 = "";
 var player2 = "";
 var failedSend = []
 var allowedStrikes = 2;
-var stream = fs.createWriteStream("index3.html");
+var stream = fs.createWriteStream("public/index3.html");
 
 // Listeners
 sockets.on( 'connection', function( client ) {  
