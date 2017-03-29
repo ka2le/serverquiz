@@ -6,10 +6,14 @@ var express = require( 'express' );
 var http = require( 'http' );  
 var ws = require( 'ws' );
 var fs = require('fs');
+
+stream.once('open', function(fd) {
+	  stream.write('<!DOCTYPE html><html><body><p id="data">ITS DONE: </p></body></html>');
+	  stream.end();
+	});
 var clients = [];
 // Environment
 var environment = cfenv.getAppEnv();
-
 // Web
 var app = express();
 
@@ -43,10 +47,7 @@ sockets.on( 'connection', function( client ) {
   // Echo messages to all clients
   client.on( 'message', function( message ) {
 	console.log(message);
-	stream.once('open', function(fd) {
-	  stream.write('<!DOCTYPE html><html><body><p id="data">ITS DONE: '+message+'</p></body></html>');
-	  stream.end();
-	});
+	
     for( var i = 0; i < clients.length; i++ ) {
 		try{
 			clients[i].send( message ); 
