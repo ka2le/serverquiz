@@ -123,13 +123,16 @@ label{
  bottom: 6vh;
 }
 #player .square{
-	 margin-top:15vh;
+	 margin-top:4vh;
 }
 #player .bottomSquares{
  bottom: 15vh;
 }
 #host .square{
  margin-top:10vh;
+}
+#player #top{
+	 min-height:13vh;
 }
 .square label{
 	//color:green;
@@ -167,7 +170,10 @@ label{
 	//display:none;
 	font-size: 0.7em;
 }
-
+#result{
+	//display:none;
+	font-size: 0.6em;
+}
 h1 {
 	//font-weight: bold;
 	//font-size: 4em;

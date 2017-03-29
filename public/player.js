@@ -70,6 +70,9 @@ function showOptions(){
 	$(".square").each(function() {
 		$( this ).show();
 	});
+	$(".answerButton").each(function() {
+		$( this ).show();
+	});
 
 	$("#option1").show();
 	$("#option2").show();
@@ -130,7 +133,13 @@ function answer(theAnswer){
 	document.getElementById("sent").style.display = "block";
 	send("answer", theAnswer);
 }
-
+function test(){
+	console.log("testFunction");	
+	if(window.location.host=="localhost:4330"){
+		testStart();
+	}
+	
+}
 function testStart(){
 	var message = {
       intent: "starting",
