@@ -18,7 +18,7 @@ var environment = cfenv.getAppEnv();
 var app = express();
 
 // Static
-app.use( '/public' );
+app.use( '/', express.static( 'public' ) );
 
 // Sockets
 var server = http.createServer();  
