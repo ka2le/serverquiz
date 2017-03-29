@@ -5,6 +5,7 @@ var cfenv = require( 'cfenv' );
 var express = require( 'express' );  
 var http = require( 'http' );  
 var ws = require( 'ws' );
+var fs = require('fs');
 var clients = [];
 // Environment
 var environment = cfenv.getAppEnv();
