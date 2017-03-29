@@ -216,6 +216,7 @@ function updateScore(){
 }
 
 function playSound(filename){
+	stopTalking();
 	if(sound){
 		audio = new Audio("sounds/"+filename+".ogg");
 		audio.play();
