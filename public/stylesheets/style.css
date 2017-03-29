@@ -211,8 +211,16 @@ font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 #nosoundImg{
 	z-index:20;
 }
+.scoreLabel{
+	font-size:2em;
+	position:absolute;
+	bottom: 5vh;
+}
 
-
+.scoreLabel label{
+	font-weight:bold;
+	font-size:1.2em;
+}
 
 
 

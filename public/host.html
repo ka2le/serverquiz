@@ -17,21 +17,25 @@
   <body onload="onload()">
 		<div id="host" class="container">
 		<div id="top">
+	<!-- 		<input type="button" onclick="testReady(1)" value="Ready1" style="display:block;"> 
+			 <input type="button" onclick="testReady(2)" value="Ready2" style="display:block;"> 
+			<input type="button" onclick="testRightAnswer()" value="test" style="display:block;">  -->
 			<!--  <input type="button" onclick="testNewRound()" value="test" style="display:block;"> 
 			 <input type="button" onclick="testJoin()" value="testJoin" style="display:block;"> 
 			 <input type="button" onclick="testReady(1)" value="Ready1" style="display:block;"> 
 			 <input type="button" onclick="testReady(2)" value="Ready2" style="display:block;"> 
 			<input type="button" onclick="start()" value="start" style="display:block;">   -->
 			<label id="theQuestion" >Waiting for players</label>
-			<h2 ><label style="display:none;">-</label><label class="score1" id="scorePlayer1" >Score Player 1: 0</label>
-			<label id="scorePlayer2" class="score2">Score Player 2: 0</label></h2>
+			
 		</div>
 		<div id="squares">	
 			<div class="square">	<label id="A1"  ></label> </div>
 			<div class="square rightSquares">	<label id="A2"    ></label></div>
 			<div class="square bottomSquares">	<label id="A3"   ></label></div>
 			<div class="square rightSquares bottomSquares">	<label id="A4"   ></label></div>
-		</div>	
+		</div>
+<label style="display:none;">-</label><label class="score1 scoreLabel" id="scorePlayer1" ></label>
+			<label id="scorePlayer2" class="score2 scoreLabel"></label>		
 		</div>
 		<div id="sound" onclick="toggelSound()"><img id="soundImg" src="images/sound.png"><img id="nosoundImg" src="images/stop.png"></div>
 	<!-- 	<div class="shape"></div>

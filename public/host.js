@@ -5,6 +5,9 @@ var scoreBoard = [0, 0];
 var currentRound = [0,0];
 var  currentQuestion = 0;
 var sound = true;
+var audio = new Audio("sounds/q1.ogg");
+var answers = [];
+var hasAnswered = 0;
 //Music Questions
 var theQuestions = [
 ["Which of these songs was released first?",
@@ -45,8 +48,7 @@ var theQuestions = [
 "2"],   
 ["Well Played","Goodbye","Player 1","And","Player 2","3"]];
 
-var answers = [];
-var hasAnswered = 0;
+
 function onload(){
 	startConnection();
 	//console.log(theQuestions[currentQuestion][0]);
@@ -55,7 +57,8 @@ function onload(){
 function continueOnload(){
 	console.log("continueOnload does nothing now on host.");
 }
-
+var playerOneAnswer = 0;
+var playerTwoAnswer = 0;
 function handleInput(data){
 	console.log(" handleInput(data)");
 	var intent = data.intent;
@@ -63,16 +66,24 @@ function handleInput(data){
 		var player = data.playerNumber;
 		var playerAnswer = data.value;
 		var correctAnswer = theQuestions[currentQuestion][5];
-		if(currentRound[player-1]==0){
-			hasAnswered++;
+		var point = -1;
+		
+		if(correctAnswer == playerAnswer){
+			point = 1;
 		}
-		if (correctAnswer == playerAnswer){
-			currentRound[player-1]=1;
-			
-		}else{
-			currentRound[player-1]=-1;
+		if(player == 1){
+			if(playerOneAnswer == 0){
+				playerOneAnswer = point;
+				currentRound[player-1]=-1;
+			}
 		}
-		if(hasAnswered>1){
+		if(player == 2){
+			if(playerTwoAnswer == 0){
+				playerOneAnswer = point;
+				currentRound[player-1]=-1;
+			}
+		}
+		if(playerTwoAnswer != 0 && playerOneAnswer != 0){
 			newRound();
 		}
 	}
@@ -89,6 +100,7 @@ function handleInput(data){
 	if(intent == "iAmReady"){
 		var theNumber = data.playerNumber;
 		console.log("iAmReady " +theNumber);
+		document.getElementById("scorePlayer"+theNumber).innerHTML = "Player 1: <label>Ready!</label>";
 		players[theNumber-1]+=2;
 		if(players[0]>0 && players[1]>0){
 			console.log("everyone ready");
@@ -102,6 +114,98 @@ function start(){
 	showNextQ();
 	send("starting");
 }
+
+function newRound(){
+	//scoreBoard[0] +=  currentRound[0];
+	//scoreBoard[1] +=  currentRound[1];
+	updateScore();
+	setTimeout(newRoundPart2 , 5000);
+}
+function newRoundPart2(){
+	currentQuestion++;
+	if(currentQuestion>theQuestions.length){
+		currentQuestion = 0;
+	}
+	currentRound = [0,0]
+	playerOneAnswer = 0;
+	playerTwoAnswer = 0;
+	hasAnswered = 0;
+	$(".square label").css( "color", "black" );
+	send("newQ");	
+	showNextQ();
+}
+function updateScore(){
+	stopTalking();
+	if(currentRound[0] == 1 && currentRound[1] == 1){
+		document.getElementById("theQuestion").innerHTML = "Well Done Both Of You!" //Correct answer was: "+correctAnswer +"<br>
+		scoreBoard[0] ++;
+		scoreBoard[1] ++;
+		playSound("welldone");
+	}
+	if(currentRound[0] < 0 && currentRound[1] < 0){
+		document.getElementById("theQuestion").innerHTML = "Better luck next time!"
+		playSound("betterluck");
+	}
+	if(currentRound[0] == 1 && currentRound[1] < 0){
+		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 1"
+		scoreBoard[0] ++;
+		playSound("congratsp1");
+	}
+	if(currentRound[0] < 0 && currentRound[1] == 1){
+		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 2"
+		scoreBoard[1] ++;
+		playSound("congratsp2");
+	}
+	var correctAnswer = theQuestions[currentQuestion][5];
+	for(var i= 1; i<5; i++){
+		if(correctAnswer!=i){
+			document.getElementById("A"+i).innerHTML = " ";
+		}
+	}
+	$(".square label").css( "color", "green" );
+	document.getElementById("scorePlayer1").innerHTML = "Player 1: <label>"+scoreBoard[0] + " </label> Points ";
+	send("score", 1, currentRound[0]);
+	document.getElementById("scorePlayer2").innerHTML = "Player 2: <label>"+scoreBoard[1] + " </label> Points ";
+	send("score", 2, currentRound[1]);
+	
+}
+
+function playSound(filename){
+	if(sound){
+		audio = new Audio("sounds/"+filename+".ogg");
+		audio.play();
+	}
+}
+function stopTalking(){
+	audio.pause();
+	audio.currentTime = 0;
+}
+function toggelSound(){
+	if(sound){
+		$("#nosoundImg").show();
+		sound = false;
+		stopTalking();
+	}else{
+		$("#nosoundImg").hide();
+		sound = true;
+		
+	}
+}
+function showNextQ(){
+	document.getElementById("theQuestion").innerHTML = theQuestions[currentQuestion][0];
+	playSound("q"+currentQuestion);
+	var ABCD = ['A','B','C','D']
+	for(var i= 1; i<5; i++){
+		document.getElementById("A"+i).innerHTML = ABCD[i-1]+": "+theQuestions[currentQuestion][i];
+	}
+	
+	
+}
+
+
+//-------------------------------TEST----------------------------------------------------
+
+
 function testJoin(){
 	var message = {
       intent: "loginas",
@@ -124,94 +228,12 @@ function testReady(number){
 }
 function testNewRound(){
 	currentRound[0] = 1;
-	currentRound[1] = 0; 
+	currentRound[1] = 1; 
 	newRound();
 }
-function newRound(){
-	//scoreBoard[0] +=  currentRound[0];
-	//scoreBoard[1] +=  currentRound[1];
-	updateScore();
-	setTimeout(newRoundPart2 , 4000);
+function testRightAnswer(){
+	testNewRound();
 }
-function newRoundPart2(){
-	currentQuestion++;
-	if(currentQuestion>theQuestions.length){
-		currentQuestion = 0;
-	}
-	currentRound = [0,0]
-	hasAnswered = 0;
-	send("newQ");	
-	showNextQ();
-}
-function updateScore(){
-	if(currentRound[0] == 1 && currentRound[1] == 1){
-		document.getElementById("theQuestion").innerHTML = "Well Done Both Of You!"
-		scoreBoard[0] ++;
-		scoreBoard[1] ++;
-		playSound("welldone");
-	}
-	if(currentRound[0] < 0 && currentRound[1] < 0){
-		document.getElementById("theQuestion").innerHTML = "Better luck next time!"
-		playSound("betterluck");
-	}
-	if(currentRound[0] == 1 && currentRound[1] < 0){
-		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 1"
-		scoreBoard[0] ++;
-		playSound("congratsp1");
-	}
-	if(currentRound[0] < 0 && currentRound[1] == 1){
-		document.getElementById("theQuestion").innerHTML = "Congratulations to Player 2"
-		scoreBoard[1] ++;
-		playSound("congratsp2");
-	}
-	for(var i= 1; i<5; i++){
-		document.getElementById("A"+i).innerHTML = " ";
-	}
-	if(currentRound[0] == 1){
-		document.getElementById("A1").innerHTML = "Player 1 was Right";
-	}else{
-		document.getElementById("A1").innerHTML = "Player 1 was Wrong";
-	}
-	if(currentRound[1] == 1){
-		document.getElementById("A2").innerHTML = "Player 2 was Right";
-	}else{
-		document.getElementById("A2").innerHTML = "Player 2 was Wrong";
-	}
-	document.getElementById("scorePlayer1").innerHTML = "Score Player1: "+scoreBoard[0];
-	send("score", 1, currentRound[0]);
-	document.getElementById("scorePlayer2").innerHTML = "Score Player2: "+scoreBoard[1];
-	send("score", 2, currentRound[1]);
-	
-}
-function playSound(filename){
-	if(sound){
-		var audio = new Audio("sounds/"+filename+".ogg");
-		audio.play();
-	}
-}
-function toggelSound(){
-	if(sound){
-		$("#nosoundImg").show();
-		sound = false;
-	}else{
-		$("#nosoundImg").hide();
-		sound = true;
-		
-	}
-}
-function showNextQ(){
-	document.getElementById("theQuestion").innerHTML = theQuestions[currentQuestion][0];
-	playSound("q"+currentQuestion);
-	var ABCD = ['A','B','C','D']
-	for(var i= 1; i<5; i++){
-		document.getElementById("A"+i).innerHTML = ABCD[i-1]+": "+theQuestions[currentQuestion][i];
-	}
-	
-	
-}
-
-
-
 
 /*Other questions
 
