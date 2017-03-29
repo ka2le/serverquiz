@@ -87,7 +87,13 @@ var theQuestions = [
 "Adele",
 "Lady Gaga",
 "Fergie",
-"2"]                  
+"2"],
+["That was it! Goodbye!",
+"",
+"",
+"",
+"",
+"2"]                     
 ]; //["Well Played","Goodbye","Player 1","And","Player 2","3"]
 
 
