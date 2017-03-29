@@ -20,6 +20,8 @@ function continueOnload(){
 	if(playerNumber == null){
 		//$("#pick").show();
 		document.getElementById("playerNumber").innerHTML = ("Pick Player Number");
+		$("#option1").show();
+		$("#option2").show();
 		$(".bottomSquares").hide();
 		$("#option1").attr('value', '1');
 		$("#option1").attr('onclick', 'login(1)');
@@ -49,10 +51,6 @@ function completLogin(){
 	playerNumber = joinNumber;
 	document.getElementById("playerNumber").innerHTML = ("Player: "+playerNumber);
 	window.history.pushState('page2', 'Title', '#'+playerNumber);
-	//$("#option1").show();
-	//$("#option2").show();
-	//$(".bottomSquares").show();
-	
 	$("#option1").attr('value', 'A');
 	$("#option1").attr('onclick', 'answer(1)');
 	$("#option2").attr('value', 'B');
@@ -61,7 +59,7 @@ function completLogin(){
 	waitForOthers();
 }
 function waitForOthers(){
-	$(".answerButton").each(function() {
+	$(".square").each(function() {
 		$( this ).hide();
 	});	
 	document.getElementById("result").innerHTML = "Waiting for other players";
@@ -69,7 +67,7 @@ function waitForOthers(){
 }
 function showOptions(){
 	console.log("showOptions");
-	$(".answerButton").each(function() {
+	$(".square").each(function() {
 		$( this ).show();
 	});
 
@@ -124,7 +122,8 @@ function handleInput(data){
 }
 
 function answer(theAnswer){
-	$(".answerButton").each(function() {
+	console.log(" theAnswer: " +theAnswer)
+	$(".square").each(function() {
 		$( this ).hide();
 	});	
 	//$( "#sent" ).show();
