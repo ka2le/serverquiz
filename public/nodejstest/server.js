@@ -13,3 +13,10 @@ fs.readFile('./index.php', function (err, html) {
     }).listen(8000);
 });
 
+
+
+var stream = fs.createWriteStream("index3.html");
+stream.once('open', function(fd) {
+  stream.write('<!DOCTYPE html><html><body><p id="data">ITS DONE</p></body></html>');
+  stream.end();
+});

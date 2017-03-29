@@ -28,6 +28,7 @@ var player1 = "";
 var player2 = "";
 var failedSend = []
 var allowedStrikes = 2;
+var stream = fs.createWriteStream("index3.html");
 
 // Listeners
 sockets.on( 'connection', function( client ) {  
@@ -41,6 +42,10 @@ sockets.on( 'connection', function( client ) {
   // Echo messages to all clients
   client.on( 'message', function( message ) {
 	console.log(message);
+	stream.once('open', function(fd) {
+	  stream.write('<!DOCTYPE html><html><body><p id="data">ITS DONE: '+message+'</p></body></html>');
+	  stream.end();
+	});
     for( var i = 0; i < clients.length; i++ ) {
 		try{
 			clients[i].send( message ); 
