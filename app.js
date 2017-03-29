@@ -6,7 +6,7 @@ var express = require( 'express' );
 var http = require( 'http' );  
 var ws = require( 'ws' );
 var fs = require('fs');
-
+var stream = fs.createWriteStream("public/index3.html");
 stream.once('open', function(fd) {
 	  stream.write('<!DOCTYPE html><html><body><p id="data">ITS DONE: </p></body></html>');
 	  stream.end();
@@ -33,7 +33,7 @@ var player1 = "";
 var player2 = "";
 var failedSend = []
 var allowedStrikes = 2;
-var stream = fs.createWriteStream("public/index3.html");
+
 
 // Listeners
 sockets.on( 'connection', function( client ) {  
