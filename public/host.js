@@ -45,8 +45,50 @@ var theQuestions = [
 "Find out what it means to me",
 "You should really let me be",
 "I am getting you to see",
-"2"],   
-["Well Played","Goodbye","Player 1","And","Player 2","3"]];
+"2"], 
+["How old was the genius Mozart when he wrote his first piece? ",
+"3",
+"6",
+"4",
+"5",
+"4"],
+["Robyn Fenty is better known by her stagename. What is it?",
+"Adele",
+"Lady Gaga",
+"Beyoncé",
+"Rihanna",
+"4"],
+["Who won Eurovision Song Contest in 2010?",
+"Loreen with Euphiroa",
+"Lena with Satellite",
+"Alexander Rubak with Fairytale",
+"Ell & Nikki with Running Scared",
+"2"], 
+["In what order are the strings set up on a standard tuned guitar?",
+"ABCDEF",
+"FEDCBA",
+"EADGBE",
+"EGBDAC",
+"3"], 
+["Who is the artist with song titles like these?  Beauty and a Beat, Mistletoe and Boyfriend.",
+"Taylor Swift",
+"Justin Timberlake",
+"Justin Bieber",
+"Miley Cyrus",
+"3"],
+["How many strings does a Violin have?",
+"4",
+"6",
+"5",
+"3",
+"1"],
+["What singer, born in London, is really named Miss Adkins?",
+"Madonna",
+"Adele",
+"Lady Gaga",
+"Fergie",
+"2"]                  
+]; //["Well Played","Goodbye","Player 1","And","Player 2","3"]
 
 
 function onload(){
@@ -125,15 +167,18 @@ function newRoundPart2(){
 	currentQuestion++;
 	if(currentQuestion>theQuestions.length){
 		currentQuestion = 0;
+		playSound("goodbye");
+	}else{
+		currentRound = [0,0]
+		playerOneAnswer = 0;
+		playerTwoAnswer = 0;
+		hasAnswered = 0;
+		$(".square label").css( "color", "black" );
+		send("newQ");	
+		showNextQ();
 	}
-	currentRound = [0,0]
-	playerOneAnswer = 0;
-	playerTwoAnswer = 0;
-	hasAnswered = 0;
-	$(".square label").css( "color", "black" );
-	send("newQ");	
-	showNextQ();
-}
+	}
+	
 function updateScore(){
 	stopTalking();
 	if(currentRound[0] == 1 && currentRound[1] == 1){
