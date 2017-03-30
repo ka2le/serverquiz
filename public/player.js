@@ -2,6 +2,7 @@ var role = "player";
 var playerNumber;
 var joining;
 var joinNumber;
+var started = false;
 function onload(){
 	document.getElementById("sent").style.display = "none";
 	document.getElementById("result").style.display = "none";
@@ -102,8 +103,20 @@ function handleInput(data){
 				send("loginFree");
 			}
 		}*/
-	}	
+	}
+	if(intent=="relog" && !started){
+		var whatToDo = data.value;
+		if(whatToDo=="done"){
+			document.getElementById("result").innerHTML = "Reconnected";
+			document.getElementById("result").style.display = "block";
+		}
+		if(whatToDo=="newQ"){
+			showOptions();
+		}
+		started = true;
+	}
 	if(intent=="starting" || intent=="newQ" ){
+		 started = true;
 		 showOptions();
 	}
 	if(intent=="score"){
@@ -133,12 +146,28 @@ function answer(theAnswer){
 	document.getElementById("sent").style.display = "block";
 	send("answer", theAnswer);
 }
+
+
+
+
+//--------------------------------------------Test-------------------------------------
 function test(){
 	console.log("testFunction");	
 	if(window.location.host=="localhost:4330"){
 		testStart();
 	}
 	
+
+}
+function testRelog(theValue){
+	var message = {
+      intent: "relog",
+	  value: theValue,
+	  value2: 1,
+	  sender: "host",
+	  playerNumber: playerNumber
+    };
+	handleInput(message);
 }
 function testStart(){
 	var message = {

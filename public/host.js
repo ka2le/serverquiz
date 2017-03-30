@@ -9,6 +9,7 @@ var audio = new Audio("sounds/q1.ogg");
 var answers = [];
 var hasAnswered = 0;
 //Music Questions
+var started = false;
 var theQuestions = [
 ["Which of these songs was released first?",
 "Tik Tok - Kesha",
@@ -111,7 +112,6 @@ function handleInput(data){
 	console.log(" handleInput(data)");
 	var intent = data.intent;
 	if(intent == "answer"){
-		
 		var player = data.playerNumber;
 		var playerAnswer = data.value;
 		console.log("player "+ player +" answered " +playerAnswer);
@@ -138,7 +138,29 @@ function handleInput(data){
 			newRound();
 		}
 	}
-	if(intent=="loginas"){
+	if(started){
+		if(intent == "iAmReady"){
+			var theNumber = data.playerNumber;
+			console.log("Relog " +theNumber +" with answerStatus: " +playerOneAnswer);
+			document.getElementById("scorePlayer"+theNumber).innerHTML = "Player "+theNumber+": <label>Reconnected!</label>";
+			if(theNumber==1){
+				if(playerOneAnswer!=0){
+					send("relog","done");
+				}else{
+					send("relog","newQ");
+				}
+			}
+			if(theNumber==2){
+				if(playerTwoAnswer!=0){
+					send("relog","done");
+				}else{
+					send("relog","newQ");
+				}
+			}
+			
+		}
+	}else{
+		if(intent=="loginas"){
 			var theNumber = data.value;
 			console.log("loginas " +theNumber);
 			if(players[theNumber-1]>0){
@@ -148,21 +170,24 @@ function handleInput(data){
 				players[theNumber-1]+=1;
 			}
 		}
-	if(intent == "iAmReady"){
-		var theNumber = data.playerNumber;
-		console.log("iAmReady " +theNumber);
-		document.getElementById("scorePlayer"+theNumber).innerHTML = "Player "+theNumber+": <label>Ready!</label>";
-		players[theNumber-1]+=2;
-		if(players[0]>0 && players[1]>0){
-			console.log("everyone ready");
-			start();
+		if(intent == "iAmReady"){
+			var theNumber = data.playerNumber;
+			console.log("iAmReady " +theNumber);
+			document.getElementById("scorePlayer"+theNumber).innerHTML = "Player "+theNumber+": <label>Ready!</label>";
+			players[theNumber-1]+=2;
+			if(players[0]>0 && players[1]>0){
+				console.log("everyone ready");
+				start();
+			}
 		}
-	}	
+	}
+		
 	console.log(data);
 	console.log(data.intent);
 	
 }
 function start(){
+	started = true;
 	showNextQ();
 	send("starting");
 }
