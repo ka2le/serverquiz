@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="stylesheets/style.css">
+	 <link rel="stylesheet" href="stylesheets/hamburger.css">
 	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 	 <script type="text/javascript" src="main.js"></script>
 	 <script type="text/javascript" src="player.js"></script>
@@ -31,7 +32,7 @@
 					<input type="button" onclick="testStart()" value="Start" style="display:block;">   --> 
 					<label onclick="test()" id="playerNumber" value="0"></label>
 				<div id="optionButtons">
-			</div>
+				</div>
 				<div class="square"> <input type="button" id="option1" value="A" onclick="answer(1)" class="bigbutton  answerButton"></div>
 				<div class="square rightSquares"><input type="button" id="option2" value="B" onclick="answer(2)" class="bigbutton  answerButton"></div>
 				<div class="square bottomSquares"><input type="button" id="option3" value="C" onclick="answer(3)" class="bigbutton  answerButton"></div>
@@ -39,8 +40,21 @@
 				<label id="sent"  >Answer Sent</label>
 				<label id="result" >Result</label>
 			</div>
+			<div id="menu">
+				<ul>
+					<li>1</li>
+					<li>2</li>
+				</ul>
+			</div>
 		</div>
-		
+		<div id="sound" >
+			<div id="nav-icon3">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+		</div>
 <!-- 	<div class="shape2"></div>
 	<div class="shape4"></div> -->
   </body>

@@ -11,6 +11,9 @@ function onload(){
 	console.log(playerNumber);
 	startConnection();
 	console.log(window.location.host);
+	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
+		$(this).toggleClass('open');
+	});
 	if(window.location.host=="localhost:4330"){
 		continueOnload();
 	}
@@ -165,6 +168,7 @@ function test(){
 	console.log("testFunction");	
 	if(window.location.host=="localhost:4330"){
 		testStart();
+		
 	}
 	
 
