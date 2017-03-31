@@ -115,6 +115,16 @@ function handleInput(data){
 		}
 		started = true;
 	}
+	if(intent="hostLoaded"){
+		started = false;
+		document.getElementById("playerNumber").innerHTML = ("Player: "+playerNumber);
+		iAmReady();
+		$(".square").each(function() {
+			$( this ).hide();
+		});	
+		document.getElementById("result").innerHTML = "Reconnected to host. Waiting...";
+		document.getElementById("result").style.display = "block";
+	}
 	if(intent=="starting" || intent=="newQ" ){
 		 started = true;
 		 showOptions();

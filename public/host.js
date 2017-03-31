@@ -105,6 +105,7 @@ function onload(){
 }
 function continueOnload(){
 	console.log("continueOnload does nothing now on host.");
+	send("hostLoaded");
 }
 var playerOneAnswer = 0;
 var playerTwoAnswer = 0;
