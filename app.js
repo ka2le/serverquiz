@@ -40,34 +40,40 @@ sockets.on( 'connection', function( client ) {
   // Debug
   console.log( 'Connection.' );
   clients.push(client);
-  failedSend.push(0);
+ // failedSend.push(0);
   console.log("------------------clients------------------------");
   //console.log(clients);
   //console.log(clients[0]);
   // Echo messages to all clients
   client.on( 'message', function( message ) {
 	console.log(message);
-	
-    for( var i = 0; i < clients.length; i++ ) {
+	broadcast(message);
+
+  } );
+   client.on('disconnect', function() {
+      console.log('Got disconnect!');
+      var i = clients.indexOf(socket);
+      clients.splice(i, 1);
+	  broadcast( createMessage("someoneDC"));
+   });
+} );
+function broadcast(text){
+	 for( var i = 0; i < clients.length; i++ ) {
 		try{
-			clients[i].send( message ); 
+			clients[i].send( text ); 
 		}catch(err){
 			console.log("Could not send to Client " + i + " error: " +err);
-			failedSend[i]++;
-			if(failedSend[i] > (allowedStrikes-1)){
-				console.log("removing client"+ i);
-				failedSend.splice(i, 1);
-				clients.splice(i, 1);
-			}
 			var forSender = ("Failed to send some other client with i: " +i+" error: " +err);
 			sendTo(client, forSender);
 		}	 
     }
-  } );
-} );
+}
+function createMessage(text){
+	return '{"content":"'+text+'"}';
+}
 function sendTo(theClient, text){
 	try{
-		theClient.send('{"content":"'+text+'"}');
+		theClient.send(createMessage(text));
 	}catch(err){
 		console.log("Error in sendTo(theClient, text) Error msg: " + err);
 	}
@@ -82,7 +88,12 @@ server.listen( environment.port, function() {
 } );
 
 
-
+			/* failedSend[i]++;
+			if(failedSend[i] > (allowedStrikes-1)){
+				console.log("removing client"+ i);
+				failedSend.splice(i, 1);
+				clients.splice(i, 1);
+			} */
 //------------------------------------------------------------------------------
 // node.js starter application for Bluemix
 //------------------------------------------------------------------------------
