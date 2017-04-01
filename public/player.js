@@ -130,6 +130,11 @@ function handleInput(data){
 			document.getElementById("playerNumber").innerHTML = ("Player 2 is Taken. ");
 		}
 	}
+	if(intent=="iAmReady" && playerNumber == null){
+		var theNumber = data.playerNumber;
+			$("#option"+theNumber).hide();
+			document.getElementById("playerNumber").innerHTML = ("Player " + theNumber + " is Taken. ");
+	}
 	if(intent=="relog" && !started){
 		var whatToDo = data.value;
 		if(whatToDo=="done"){
