@@ -147,7 +147,7 @@ function handleInput(data){
 		}
 		started = true;
 	}
-	if(intent=="hostLoaded"){
+	if(intent=="hostLoaded" && playerNumber != null){
 		started = false;
 		document.getElementById("playerNumber").innerHTML = ("Player: "+playerNumber);
 		iAmReady();
