@@ -30,6 +30,7 @@ function continueOnload(){
 	//$("#sent").hide();
 	console.log("continueOnload");
 	if(playerNumber == null){
+		//joining = true;
 		//$("#pick").show();
 		document.getElementById("playerNumber").innerHTML = ("Pick Player Number");
 		$("#option1").show();
@@ -39,6 +40,7 @@ function continueOnload(){
 		$("#option1").attr('onclick', 'login(1)');
 		$("#option2").attr('value', '2');
 		$("#option2").attr('onclick', 'login(2)');
+		send("whoisfree");
 	}else{
 		document.getElementById("playerNumber").innerHTML = ("Player: "+playerNumber);
 		iAmReady();
@@ -116,6 +118,17 @@ function handleInput(data){
 				send("loginFree");
 			}
 		}*/
+	}
+	//if(playerNumber == null){
+	if(intent=="freestatus" && playerNumber == null){
+		if(data.value > 0){
+			$("#option1").hide();
+			document.getElementById("playerNumber").innerHTML = ("Player 1 is Taken. ");
+		}
+		if(data.value2 > 0){
+			$("#option2").hide();
+			document.getElementById("playerNumber").innerHTML = ("Player 2 is Taken. ");
+		}
 	}
 	if(intent=="relog" && !started){
 		var whatToDo = data.value;

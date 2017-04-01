@@ -171,6 +171,9 @@ function handleInput(data){
 				players[theNumber-1]+=1;
 			}
 		}
+		if(intent=="whoisfree"){
+			send("freestatus", players[0], players[1]);
+		}
 		if(intent == "iAmReady"){
 			var theNumber = data.playerNumber;
 			console.log("iAmReady " +theNumber);
