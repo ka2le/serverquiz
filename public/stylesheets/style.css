@@ -224,6 +224,28 @@ font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 
 
 
+#menu{
+position:absolute;
+background:black;
+color:white;
+width:100%;
+z-index:300;
+display:none;
+//font-size:em;
+padding:2vh;
+	-webkit-box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.75);
+box-shadow: -3px 10px 71px 0px rgba(0,0,0,0.75);
+}
+#menu input{
+	background:none;
+	color:white;
+	margin-top:2vh;
+font-size:2em;
+border:none;
+}
+
+
 .shape {
 	position:absolute;
 	bottom: 0px;

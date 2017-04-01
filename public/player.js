@@ -3,6 +3,7 @@ var playerNumber;
 var joining;
 var joinNumber;
 var started = false;
+
 function onload(){
 	document.getElementById("sent").style.display = "none";
 	document.getElementById("result").style.display = "none";
@@ -13,6 +14,13 @@ function onload(){
 	console.log(window.location.host);
 	$('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function(){
 		$(this).toggleClass('open');
+		console.log("menu");
+		if($("#menu").is(":visible")){
+			$("#menu").slideUp(200);
+		}else{
+			$("#menu").slideDown(200);
+		}
+		
 	});
 	if(window.location.host=="localhost:4330"){
 		continueOnload();
@@ -87,7 +95,9 @@ function showOptions(){
 function handleInput(data){
 	console.log(" handleInput(data)");
 	console.log(data);
+	
 	var intent = data.intent;
+	console.log(intent);
 	if(joining){
 		if(intent=="loginTaken"){
 			$("#option"+joinNumber).hide();
@@ -114,11 +124,12 @@ function handleInput(data){
 			document.getElementById("result").style.display = "block";
 		}
 		if(whatToDo=="newQ"){
+			console.log("relog + newQ")
 			showOptions();
 		}
 		started = true;
 	}
-	if(intent="hostLoaded"){
+	if(intent=="hostLoaded"){
 		started = false;
 		document.getElementById("playerNumber").innerHTML = ("Player: "+playerNumber);
 		iAmReady();
@@ -129,6 +140,7 @@ function handleInput(data){
 		document.getElementById("result").style.display = "block";
 	}
 	if(intent=="starting" || intent=="newQ" ){
+		console.log('intent=="starting" || intent=="newQ"');
 		 started = true;
 		 showOptions();
 	}
@@ -193,7 +205,16 @@ function testStart(){
     };
 	handleInput(message);
 }
-
+function testNew(){
+	var message = {
+      intent: "newQ",
+	  value: 1,
+	  value2: 1,
+	  sender: "host",
+	  playerNumber: playerNumber
+    };
+	handleInput(message);
+}
 function testFunction(){
 	var message = {
       intent: "loginFree",
@@ -211,6 +232,16 @@ function testFunction2(){
 	  value2: 1,
 	  sender: role,
 	  playerNumber: playerNumber
+    };
+	handleInput(message);
+}
+function testCorrect(){
+	var message = {
+      intent: "score",
+	  value: 1,
+	  value2: 1,
+	  sender: role,
+	  playerNumber: 0
     };
 	handleInput(message);
 }
