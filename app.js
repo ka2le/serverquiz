@@ -63,8 +63,8 @@ function broadcast(text){
 			clients[i].send( text ); 
 		}catch(err){
 			console.log("Could not send to Client " + i + " error: " +err);
-			var forSender = ("Failed to send some other client with i: " +i+" error: " +err);
-			sendTo(client, forSender);
+			//var forSender = ("Failed to send some other client with i: " +i+" error: " +err);
+			//sendTo(client, forSender);
 		}	 
     }
 }
