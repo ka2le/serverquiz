@@ -8,6 +8,9 @@ function onload(){
 	document.getElementById("sent").style.display = "none";
 	document.getElementById("result").style.display = "none";
 	var url = window.location.href;
+	$(".square").click(function() {
+		console.log(this);
+	});	
 	playerNumber = url.split("#")[1];
 	console.log(playerNumber);
 	startConnection();
@@ -202,6 +205,11 @@ function test(){
 	}
 	
 
+}
+
+function divFunction(number){
+
+	console.log("divFunction " + number);
 }
 function testRelog(theValue){
 	var message = {

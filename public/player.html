@@ -33,14 +33,14 @@
 					<label onclick="test()" id="playerNumber" value="0"></label>
 				<div id="optionButtons">
 				</div>
-				<div class="square"> <input type="button" id="option1" value="A" onclick="answer(1)" class="bigbutton  answerButton"></div>
-				<div class="square rightSquares"><input type="button" id="option2" value="B" onclick="answer(2)" class="bigbutton  answerButton"></div>
-				<div class="square bottomSquares"><input type="button" id="option3" value="C" onclick="answer(3)" class="bigbutton  answerButton"></div>
-				<div class="square rightSquares  bottomSquares"><input type="button" id="option4" value="D" onclick="answer(4)" class="bigbutton   answerButton"></div>
+				
 				<label id="sent"  >Answer Sent</label>
 				<label id="result" >Result</label>
 			</div>
-			
+			<div class="square" onclick="divFunction(1)">  <input type="button" id="option1" value="A" onclick="answer(1)" class="bigbutton  answerButton"> </input></div>
+				<div class="square rightSquares" onclick="divFunction(2)"><input type="button" id="option2" value="B" onclick="answer(2)" class="bigbutton  answerButton"> </input></div>
+				<div class="square bottomSquares" onclick="divFunction(3)"><input type="button" id="option3" value="C" onclick="answer(3)" class="bigbutton  answerButton"> </input></div>
+				<div class="square rightSquares  bottomSquares" onclick="divFunction(4)"><input type="button" id="option4" value="D" onclick="answer(4)" class="bigbutton   answerButton"> </input></div>
 		</div>
 		<div id="sound" >
 			<div id="nav-icon3">
